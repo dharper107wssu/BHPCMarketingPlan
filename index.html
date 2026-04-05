@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BHC Referral Growth Strategy</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #12120f;
+  --ink-mid: #3a3a32;
+  --ink-light: #5a5a50;
+  --paper: #f7f6f1;
+  --cream: #eeecea;
+  --border: #dddbd3;
+  --white: #ffffff;
+  --teal: #0d7a6a;
+  --teal-light: #e0f2ee;
+  --teal-mid: #1a9e82;
+  --blue: #1b5ea0;
+  --blue-light: #e5f0fa;
+  --amber: #a85f00;
+  --amber-light: #fdf2e0;
+  --coral: #b8321e;
+  --coral-light: #fcecea;
+  --purple: #5a3585;
+  --purple-light: #f0eafa;
+  --rose: #9c2d5a;
+  --rose-light: #fce8f0;
+  --slate: #4a5568;
+  --shadow-sm: 0 1px 4px rgba(18,18,15,0.06);
+  --shadow-md: 0 4px 16px rgba(18,18,15,0.09);
+  --r: 10px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Instrument Sans',sans-serif;background:var(--paper);color:var(--ink);font-size:15px;line-height:1.65;}
+
+/* HEADER */
+.site-header{background:var(--ink);color:white;padding:3.5rem 2rem 3rem;position:relative;overflow:hidden;}
+.site-header::before{content:'';position:absolute;top:-80px;right:-60px;width:380px;height:380px;border-radius:50%;background:rgba(255,255,255,0.03);}
+.site-header::after{content:'';position:absolute;bottom:-60px;left:28%;width:260px;height:260px;border-radius:50%;background:rgba(13,122,106,0.18);}
+.header-inner{max-width:1120px;margin:0 auto;position:relative;z-index:1;}
+.header-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:1.25rem;flex-wrap:wrap;}
+.header-badge{display:inline-block;font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal-mid);border:1px solid rgba(26,158,130,0.4);padding:4px 12px;border-radius:100px;}
+.oon-badge{display:inline-block;font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#e8a44a;border:1px solid rgba(232,164,74,0.5);padding:4px 12px;border-radius:100px;}
+.header-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.4rem);line-height:1.12;font-weight:400;margin-bottom:0.85rem;}
+.header-title em{color:var(--teal-mid);font-style:italic;}
+.header-sub{font-size:14px;color:rgba(255,255,255,0.58);max-width:600px;line-height:1.65;}
+.header-stats{display:flex;gap:2.5rem;margin-top:2.25rem;flex-wrap:wrap;}
+.stat{display:flex;flex-direction:column;gap:3px;}
+.stat-number{font-family:'Playfair Display',serif;font-size:1.9rem;color:white;line-height:1;}
+.stat-label{font-size:12px;color:rgba(255,255,255,0.45);letter-spacing:0.02em;}
+
+/* OON NOTICE BANNER */
+.oon-banner{background:#fff8ed;border-bottom:1px solid #f5dda8;padding:0.85rem 2rem;}
+.oon-inner{max-width:1120px;margin:0 auto;display:flex;align-items:flex-start;gap:12px;}
+.oon-icon{font-size:18px;flex-shrink:0;margin-top:1px;}
+.oon-text{font-size:13px;line-height:1.6;color:#6b4a00;}
+.oon-text strong{color:#4a3200;}
+
+/* NAV */
+.sticky-nav{background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;padding:0 2rem;}
+.nav-inner{max-width:1120px;margin:0 auto;display:flex;gap:0;overflow-x:auto;scrollbar-width:none;}
+.nav-inner::-webkit-scrollbar{display:none;}
+.nav-tab{display:flex;align-items:center;gap:7px;padding:0.95rem 1.2rem;font-size:13px;font-weight:500;color:var(--ink-light);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all 0.18s;background:none;border-top:none;border-left:none;border-right:none;font-family:'Instrument Sans',sans-serif;letter-spacing:0.01em;}
+.nav-tab:hover{color:var(--ink);}
+.nav-tab.active{color:var(--teal);border-bottom-color:var(--teal);}
+.nav-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+
+/* MAIN */
+.main{max-width:1120px;margin:0 auto;padding:2.25rem 2rem;}
+.section{display:none;animation:fadeUp 0.28s ease;}
+.section.active{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(7px);}to{opacity:1;transform:translateY(0);}}
+
+.section-intro{max-width:680px;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border);}
+.section-intro h2{font-family:'Playfair Display',serif;font-size:2rem;font-weight:400;margin-bottom:0.5rem;line-height:1.2;}
+.section-intro p{color:var(--ink-light);font-size:14px;}
+
+/* OON CALLOUT — inline */
+.oon-callout{background:#fff8ed;border:1px solid #f5dda8;border-radius:var(--r);padding:1rem 1.25rem;margin-bottom:1.5rem;font-size:13.5px;line-height:1.65;color:#5a3d00;}
+.oon-callout strong{color:#3d2800;}
+
+/* CARDS GRID */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem;margin-bottom:2rem;}
+.card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:all 0.2s;position:relative;}
+.card:hover{border-color:var(--teal-mid);box-shadow:var(--shadow-md);transform:translateY(-2px);}
+.card-header{display:flex;align-items:flex-start;gap:12px;padding:1.25rem;border-bottom:1px solid var(--border);}
+.card-icon{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.card-title{font-size:15px;font-weight:600;margin-bottom:3px;}
+.card-sub{font-size:12px;color:var(--ink-light);}
+.card-body{padding:1rem 1.25rem;}
+.card-body p{font-size:13px;color:var(--ink-light);line-height:1.6;}
+.card-footer{padding:0.75rem 1.25rem;background:var(--cream);display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);}
+.card-rate{font-size:12px;font-weight:600;}
+.card-cta{font-size:12px;font-weight:500;color:var(--teal);display:flex;align-items:center;gap:3px;}
+.card-cta::after{content:'→';}
+.pay-pill{display:inline-block;font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:2px 7px;border-radius:100px;margin-left:6px;vertical-align:middle;}
+.pay-self{background:#fdf2e0;color:#a85f00;}
+.pay-agency{background:#e0f2ee;color:#0d7a6a;}
+.pay-court{background:#e5f0fa;color:#1b5ea0;}
+
+/* MODAL / DRAWER */
+.overlay{display:none;position:fixed;inset:0;background:rgba(10,10,8,0.52);z-index:200;backdrop-filter:blur(3px);}
+.overlay.open{display:flex;justify-content:flex-end;}
+.drawer{width:min(700px,100vw);height:100vh;background:var(--white);overflow-y:auto;animation:slideIn 0.28s ease;display:flex;flex-direction:column;}
+@keyframes slideIn{from{transform:translateX(100%);}to{transform:translateX(0);}}
+.drawer-header{padding:1.5rem 1.75rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start;position:sticky;top:0;background:var(--white);z-index:1;}
+.drawer-title-group{flex:1;}
+.drawer-badge{display:inline-block;font-size:11px;font-weight:600;letter-spacing:0.09em;text-transform:uppercase;padding:3px 10px;border-radius:100px;margin-bottom:8px;}
+.drawer-title{font-family:'Playfair Display',serif;font-size:1.55rem;font-weight:400;line-height:1.2;}
+.drawer-close{width:32px;height:32px;border:1px solid var(--border);border-radius:50%;background:none;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;color:var(--ink-light);flex-shrink:0;margin-left:1rem;transition:all 0.15s;}
+.drawer-close:hover{background:var(--cream);}
+.drawer-body{padding:1.75rem;flex:1;}
+.drawer-section{margin-bottom:1.85rem;}
+.drawer-section-title{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-light);margin-bottom:0.75rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);}
+.drawer-body p{font-size:14px;line-height:1.72;color:var(--ink-mid);margin-bottom:0.75rem;}
+.drawer-body p:last-child{margin-bottom:0;}
+.drawer-body strong{color:var(--ink);font-weight:600;}
+
+/* OON drawer block */
+.oon-drawer{background:#fff8ed;border:1px solid #f5dda8;border-radius:8px;padding:1rem 1.25rem;margin:0.75rem 0;font-size:13.5px;line-height:1.65;color:#5a3d00;}
+.oon-drawer .oon-label{font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#a85f00;margin-bottom:5px;display:block;}
+
+/* STEP LIST */
+.step-list{list-style:none;counter-reset:steps;}
+.step-list li{counter-increment:steps;display:flex;gap:12px;padding:0.75rem 0;border-bottom:1px solid var(--border);font-size:14px;line-height:1.6;color:var(--ink-mid);}
+.step-list li:last-child{border-bottom:none;}
+.step-list li::before{content:counter(steps);width:24px;height:24px;background:var(--teal);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0;margin-top:2px;}
+
+/* PITCH BOX */
+.pitch-box{background:var(--teal-light);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin:1rem 0;font-size:14px;color:var(--ink-mid);line-height:1.7;}
+.pitch-box .pitch-label{font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--teal);margin-bottom:6px;display:block;}
+.pitch-box em{font-style:italic;}
+
+/* TAGS */
+.tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:0.5rem;}
+.tag{font-size:12px;padding:4px 11px;border-radius:100px;border:1px solid var(--border);color:var(--ink-light);background:var(--cream);}
+.tag.highlight{border-color:var(--teal);color:var(--teal);background:var(--teal-light);}
+
+/* RATE PILL */
+.rate-pill{display:inline-flex;align-items:center;padding:4px 12px;border-radius:100px;font-size:13px;font-weight:600;margin:0.25rem 0.25rem 0.25rem 0;}
+
+/* OVERVIEW */
+.overview-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1rem;margin-bottom:2rem;}
+.overview-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:1.35rem;cursor:pointer;transition:all 0.2s;}
+.overview-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px);}
+.ov-icon{font-size:1.9rem;margin-bottom:0.75rem;}
+.ov-title{font-weight:600;font-size:15px;margin-bottom:4px;}
+.ov-desc{font-size:13px;color:var(--ink-light);margin-bottom:0.75rem;line-height:1.5;}
+.ov-count{font-size:12px;font-weight:600;color:var(--teal);}
+
+/* 90 DAY */
+.day-block{background:var(--white);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:1rem;}
+.day-block-header{display:flex;align-items:center;gap:14px;padding:1.1rem 1.35rem;cursor:pointer;transition:background 0.15s;}
+.day-block-header:hover{background:var(--cream);}
+.day-block-num{width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.15rem;flex-shrink:0;}
+.day-block-info{flex:1;}
+.day-block-title{font-weight:600;font-size:15px;}
+.day-block-sub{font-size:13px;color:var(--ink-light);}
+.day-block-arrow{font-size:20px;color:var(--ink-light);transition:transform 0.2s;}
+.day-block.open .day-block-arrow{transform:rotate(90deg);}
+.day-block-body{display:none;padding:0 1.35rem 1.35rem;border-top:1px solid var(--border);}
+.day-block.open .day-block-body{display:block;}
+.day-block-body ul{padding-left:1.25rem;margin-top:0.85rem;}
+.day-block-body li{font-size:14px;color:var(--ink-mid);margin-bottom:0.6rem;line-height:1.65;}
+
+/* MATERIALS TABLE */
+.materials-table{width:100%;border-collapse:collapse;font-size:14px;}
+.materials-table th{text-align:left;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-light);padding:0.6rem 0.85rem;border-bottom:1px solid var(--border);}
+.materials-table td{padding:0.85rem;border-bottom:1px solid var(--border);vertical-align:top;}
+.materials-table tr:last-child td{border-bottom:none;}
+.materials-table tr{cursor:pointer;transition:background 0.15s;}
+.materials-table tr:hover td{background:var(--cream);}
+.materials-table td:first-child{font-weight:500;}
+
+/* TRAINING CARDS */
+.training-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:1.35rem;margin-bottom:1rem;}
+.training-card h3{font-size:15px;font-weight:600;margin-bottom:0.35rem;}
+.training-card .tc-meta{font-size:12px;color:var(--ink-light);margin-bottom:0.65rem;display:flex;flex-wrap:wrap;gap:8px;}
+.training-card p{font-size:13.5px;color:var(--ink-mid);line-height:1.65;}
+.training-category{font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:2px 8px;border-radius:100px;margin-bottom:0.75rem;display:inline-block;}
+
+/* COLOR UTILITIES */
+.c-teal{background:var(--teal-light);color:var(--teal);}
+.c-blue{background:var(--blue-light);color:var(--blue);}
+.c-amber{background:var(--amber-light);color:var(--amber);}
+.c-coral{background:var(--coral-light);color:var(--coral);}
+.c-purple{background:var(--purple-light);color:var(--purple);}
+.c-rose{background:var(--rose-light);color:var(--rose);}
+.border-teal{border-top:3px solid var(--teal-mid);}
+.border-blue{border-top:3px solid var(--blue);}
+.border-amber{border-top:3px solid var(--amber);}
+.border-coral{border-top:3px solid var(--coral);}
+.border-purple{border-top:3px solid var(--purple);}
+.border-rose{border-top:3px solid var(--rose);}
+
+/* RESPONSIVE */
+@media(max-width:640px){.cards-grid{grid-template-columns:1fr;}.overview-grid{grid-template-columns:1fr 1fr;}.header-stats{gap:1.5rem;}.main{padding:1.25rem 1rem;}}
+.drawer::-webkit-scrollbar{width:4px;}
+.drawer::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-eyebrow">
+      <span class="header-badge">BHC Growth Strategy 2025–2026</span>
+      <span class="oon-badge">Out-of-Network &amp; Self-Pay Practice</span>
+    </div>
+    <h1 class="header-title">Psychological Assessment<br><em>Referral Network Playbook</em></h1>
+    <p class="header-sub">Behavioral Health Connections — Baltimore County, Harford County &amp; surrounding areas. Comprehensive strategy for an OON/self-pay practice to build a full, high-revenue referral network across schools, clinical providers, legal systems, foster care, veterans, and trainings.</p>
+    <div class="header-stats">
+      <div class="stat"><span class="stat-number">6</span><span class="stat-label">Referral categories</span></div>
+      <div class="stat"><span class="stat-number">25+</span><span class="stat-label">Provider types to target</span></div>
+      <div class="stat"><span class="stat-number">$1.5K–$5K</span><span class="stat-label">Per evaluation revenue</span></div>
+      <div class="stat"><span class="stat-number">OON</span><span class="stat-label">Self-pay positioning strategy</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- OON BANNER -->
+<div class="oon-banner">
+  <div class="oon-inner">
+    <span class="oon-icon">⚡</span>
+    <div class="oon-text"><strong>OON/Self-Pay Positioning Note:</strong> BHC is out-of-network and does not bill insurance directly. This is addressed throughout each section with tailored messaging. Your OON status is a competitive asset in legal, school, foster care, and veteran channels — and a premium positioning tool in clinical channels. Every drawer explains exactly how to present this to each referral source.</div>
+  </div>
+</div>
+
+<!-- STICKY NAV -->
+<nav class="sticky-nav">
+  <div class="nav-inner">
+    <button class="nav-tab active" onclick="showSection('overview',this)"><span class="nav-dot" style="background:#1a9e82"></span>Overview</button>
+    <button class="nav-tab" onclick="showSection('schools',this)"><span class="nav-dot" style="background:#1b5ea0"></span>School Systems</button>
+    <button class="nav-tab" onclick="showSection('clinical',this)"><span class="nav-dot" style="background:#5a3585"></span>Clinical Referrals</button>
+    <button class="nav-tab" onclick="showSection('legal',this)"><span class="nav-dot" style="background:#a85f00"></span>Legal &amp; Justice</button>
+    <button class="nav-tab" onclick="showSection('foster',this)"><span class="nav-dot" style="background:#9c2d5a"></span>Foster Care &amp; Adoption</button>
+    <button class="nav-tab" onclick="showSection('veterans',this)"><span class="nav-dot" style="background:#b8321e"></span>Veterans &amp; DBQ</button>
+    <button class="nav-tab" onclick="showSection('trainings',this)"><span class="nav-dot" style="background:#0d7a6a"></span>Trainings</button>
+    <button class="nav-tab" onclick="showSection('materials',this)"><span class="nav-dot" style="background:#4a5568"></span>Marketing</button>
+    <button class="nav-tab" onclick="showSection('plan',this)"><span class="nav-dot" style="background:#1a9e82"></span>90-Day Plan</button>
+  </div>
+</nav>
+
+<main class="main">
+
+<!-- ══ OVERVIEW ══ -->
+<section class="section active" id="sec-overview">
+  <div class="section-intro">
+    <h2>Your referral ecosystem</h2>
+    <p>BHC is an out-of-network, self-pay psychological assessment practice. This changes the channels you prioritize — and how you pitch within each one. Click any category to jump to its full strategy.</p>
+  </div>
+
+  <div class="oon-callout">
+    <strong>Being OON is a positioning advantage, not a limitation</strong> — in the right channels. School districts pay directly for IEEs regardless of insurance status. Courts and attorneys fund evaluations outside of insurance entirely. Veterans and DBQ clients always pay out-of-pocket. Foster care and adoption agencies issue purchase orders or are privately funded. Legal channels are almost universally cash-pay. Your pitch in every channel: <em>"We don't bill insurance — which means no authorization delays, no panel restrictions, and faster service for your client."</em>
+  </div>
+
+  <div class="overview-grid">
+    <div class="overview-card" onclick="showSection('schools',document.querySelectorAll('.nav-tab')[1])">
+      <div class="ov-icon">🏫</div>
+      <div class="ov-title">School Systems</div>
+      <div class="ov-desc">IEE evals are district-funded regardless of your OON status. BCPS, HCPS, private &amp; charter.</div>
+      <div class="ov-count">$2,500–$5,000/eval · Direct district pay</div>
+    </div>
+    <div class="overview-card" onclick="showSection('clinical',document.querySelectorAll('.nav-tab')[2])">
+      <div class="ov-icon">🏥</div>
+      <div class="ov-title">Clinical Providers</div>
+      <div class="ov-desc">Pediatricians, psychiatrists, therapists. OON pitch: speed &amp; thoroughness insurance can't match.</div>
+      <div class="ov-count">$1,800–$4,500/eval · Self-pay</div>
+    </div>
+    <div class="overview-card" onclick="showSection('legal',document.querySelectorAll('.nav-tab')[3])">
+      <div class="ov-icon">⚖️</div>
+      <div class="ov-title">Legal &amp; Justice</div>
+      <div class="ov-desc">Family law, juvenile justice, SSDI attorneys. Nearly all cash-pay — OON status is irrelevant here.</div>
+      <div class="ov-count">$2,000–$5,000/eval · Attorney/court pay</div>
+    </div>
+    <div class="overview-card" onclick="showSection('foster',document.querySelectorAll('.nav-tab')[4])">
+      <div class="ov-icon">🏡</div>
+      <div class="ov-title">Foster Care &amp; Adoption</div>
+      <div class="ov-desc">Agency purchase orders, adoptive family self-pay, court-ordered evaluations. High-demand, underserved.</div>
+      <div class="ov-count">$1,500–$4,000/eval · Mixed pay sources</div>
+    </div>
+    <div class="overview-card" onclick="showSection('veterans',document.querySelectorAll('.nav-tab')[5])">
+      <div class="ov-icon">🎖️</div>
+      <div class="ov-title">Veterans &amp; DBQ</div>
+      <div class="ov-desc">100% self-pay by design. OON is the norm for DBQ evaluations — this channel is built for you.</div>
+      <div class="ov-count">$600–$1,800/DBQ · Always self-pay</div>
+    </div>
+    <div class="overview-card" onclick="showSection('trainings',document.querySelectorAll('.nav-tab')[6])">
+      <div class="ov-icon">📚</div>
+      <div class="ov-title">Trainings &amp; CE</div>
+      <div class="ov-desc">BHP training arm delivers CE workshops, supervision, and professional development that feeds BHC referrals.</div>
+      <div class="ov-count">Revenue + referral flywheel</div>
+    </div>
+  </div>
+
+  <div class="section-intro" style="margin-top:1rem;max-width:100%;">
+    <h2 style="font-size:1.45rem;margin-bottom:0.75rem;">First step: register on eMMA before anything else</h2>
+    <p>Register BHC on <strong>Maryland's eMaryland Marketplace Advantage (eMMA)</strong> at emma.maryland.gov under NAICS codes 621112 and 621999. School districts, DJS, DHS, and courts use this portal to find and contract with providers. As an OON provider, your eMMA registration lets agencies issue <strong>purchase orders directly to BHC</strong> — bypassing insurance entirely. This takes 1–2 business days and costs nothing.</p>
+  </div>
+</section>
+
+<!-- ══ SCHOOL SYSTEMS ══ -->
+<section class="section" id="sec-schools">
+  <div class="section-intro">
+    <h2>School system contracts</h2>
+    <p>School systems are one of your best OON channels. IEE evaluations are <strong>paid directly by the district</strong> — no insurance involvement. For general contracted evaluations, many districts issue purchase orders to OON providers when their internal staff cannot meet IDEA's 60-day timeline. Click any card for the full strategy.</p>
+  </div>
+  <div class="oon-callout"><strong>OON impact on schools:</strong> Mostly favorable. IEE evaluations are always direct district pay — your OON status is irrelevant. For contracted slots, lead with your expertise, turnaround time, and the district's legal obligation to complete evaluations within 60 days. Position OON as a feature: "We have no authorization requirements, no panel limitations, and no insurance delays."</div>
+  <div class="cards-grid">
+
+    <div class="card border-blue" onclick="openDrawer('bcps')">
+      <div class="card-header"><div class="card-icon c-blue">🏫</div>
+        <div><div class="card-title">Baltimore County Public Schools</div><div class="card-sub">115,000+ students · Towson, MD</div></div>
+      </div>
+      <div class="card-body"><p>Third-largest MD district. Contracts external psychologists for IEP evaluations when internal staff are overloaded. Purchase orders issued directly — no insurance billing.</p></div>
+      <div class="card-footer"><span class="card-rate" style="color:var(--blue)">$2,500–$5,000 <span class="pay-pill pay-agency">District PO</span></span><span class="card-cta">Full strategy</span></div>
+    </div>
+
+    <div class="card border-blue" onclick="openDrawer('hcps')">
+      <div class="card-header"><div class="card-icon c-blue">🏫</div>
+        <div><div class="card-title">Harford County Public Schools</div><div class="card-sub">37,000+ students · Bel Air, MD</div></div>
+      </div>
+      <div class="card-body"><p>Your home turf — BHP already operates here. HCPS has fewer contracted psych providers than BCPS and serves Edgewood, Aberdeen, and Joppatowne directly. Fastest school-system entry point.</p></div>
+      <div class="card-footer"><span class="card-rate" style="color:var(--blue)">$2,500–$5,000 <span class="pay-pill pay-agency">District PO</span></span><span class="card-cta">Full strategy</span></div>
+    </div>
+
+    <div class="card border-blue" onclick="openDrawer('iee')">
+      <div class="card-header"><div class="card-icon c-blue">📝</div>
+        <div><div class="card-title">Independent Educational Evaluations (IEE)</div><div class="card-sub">Both counties · Always district-funded</div></div>
+      </div>
+      <div class="card-body"><p>When parents dispute a school's eval, IDEA mandates the district pay for an independent one at market rates. As an OON provider, you are <em>ideal</em> for IEEs — independence is the entire point. This is your highest-priority school channel.</p></div>
+      <div class="card-footer"><span class="card-rate" style="color:var(--blue)">$3,000–$5,000 <span class="pay-pill pay-agency">District pays</span></span><span class="card-cta">Full strategy</span></div>
+    </div>
+
+    <div class="card border-blue" onclick="openDrawer('private-schools')">
+      <div class="card-header"><div class="card-icon c-blue">🏛️</div>
+        <div><div class="card-title">Private &amp; Catholic Schools</div><div class="card-sub">Regional · Parent self-pay</div></div>
+      </div>
+      <div class="card-body"><p>Private schools have no internal psychologists. Families at private schools typically have higher income, are accustomed to self-pay services, and actively seek high-quality, thorough evaluations. Strong OON fit.</p></div>
+      <div class="card-footer"><span class="card-rate" style="color:var(--blue)">$2,500–$4,500 <span class="pay-pill pay-self">Self-pay</span></span><span class="card-cta">Full strategy</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ CLINICAL ══ -->
+<section class="section" id="sec-clinical">
+  <div class="section-intro">
+    <h2>Clinical provider referrals</h2>
+    <p>Clinical providers remain your highest-volume source even OON. Your pitch shifts from insurance coverage to what families actually want: speed, expertise, and a comprehensive report that cuts through diagnostic ambiguity. Providers refer out-of-network constantly when their insurance-panel options have 6–18 month waits.</p>
+  </div>
+  <div class="oon-callout"><strong>OON pitch to clinical providers:</strong> "We are a self-pay practice, which means we have no panel restrictions, no authorization delays, and no insurance red tape. We can typically complete an evaluation within 3–4 weeks of intake — compared to 6–18 months at panel-based hospital programs. Families who need answers now are exactly who we serve. We provide superbills so families can seek out-of-network reimbursement from their insurance if applicable."</div>
+  <div class="cards-grid">
+
+    <div class="card border-purple" onclick="openDrawer('pediatricians')">
+      <div class="card-header"><div class="card-icon c-purple">👶</div>
+        <div><div class="card-title">Pediatricians &amp; Family Practice</div><div class="card-sub">Highest volume · ADHD, autism, LD referrals</div></div>
+      </div>
+      <div class="card-body"><p>Parents bring ADHD and learning concerns to their pediatrician first. Physicians can't evaluate — they refer. OON providers who move fast are frequently preferred over in-network programs with year-long waits.</p></div>
+      <div class="card-footer"><span class="card-rate" style="color:var(--purple)">$1,800–$3,500 <span class="pay-pill pay-self">Self-pay + superbill</span></span><span class="card-cta">Full strategy</span></div>
+    </div>
+
+    <div class="card border-purple" onclick="openDrawer('psychiatrists')">
+      <div class="card-header"><div class="card-icon c-purple">🧠</div>
+        <div><div class="card-title">Child &amp; Adolescent Psychiatrists</div><div class="card-sub">Direct testing referrals · Ongoing relationship</div></div>
+      </div>
+      <div class="card-body"><p>Psychiatrists need formal testing before treating complex presentations. They refer to OON evaluators regularly — speed and report quality matter far more than panel membership to this provider type.</p></div>
+      <div class="card-footer"><span class="card-rate" style="color:var(--purple)">$2,000–$4,000 <span class="pay-pill pay-self">Self-pay + superbill</span></span><span class="card-cta">Full strategy</span></div>
+    </div>
+
+    <div class="card border-purple" onclick="openDrawer('therapists')">
+      <div class="card-header"><div class="card-icon c-purple">💬</div>
+        <div><div class="card-title">LCPCs, LCSWs &amp; Counselors</div><div class="card-sub">Your existing network · Fastest activation</div></div>
+      </div>
+      <div class="card-body"><p>BHP's training and supervision network is your fastest-converting referral source. Clinicians who trained with you trust your work. They regularly encounter clients needing formal testing and need a provider to send them to.</p></div>
+      <div class="card-footer"><span class="card-rate" style="color:var(--purple)">$1,500–$3,000 <span class="pay-pill pay-self">Self-pay + superbill</span></span><span class="card-cta">Full strategy</span></div>
+    </div>
+
+    <div class="card border-purple" onclick="openDrawer('neurologists')">
+      <div class="card-header"><div class="card-icon c-purple">⚡</div>
+        <div><div class="card-title">Neurologists &amp; Developmental Pediatricians</div><div class="card-sub">ADHD, autism, TBI · High-complexity evals</div></div>
+      </div>
+      <div class="card-body"><p>Neurologists managing complex neurodevelopmental presentations need thorough psychological testing. Kennedy Krieger regularly refers outward. These are high-value specialty referrals where OON is standard.</p></div>
+      <div class="card-footer"><span class="card-rate" style="color:var(--purple)">$2,500–$5,000 <span class="pay-pill pay-self">Self-pay + superbill</span></span><span class="card-cta">Full strategy</span></div>
+    </div>
+
+    <div class="card border-purple" onclick="openDrawer('sheppard')">
+      <div class="card-header"><div class="card-icon c-purple">🏥</div>
+        <div><div class="card-title">Sheppard Pratt &amp; Hospital Systems</div><div class="card-sub">Discharge referrals · Outpatient follow-up</div></div>
+      </div>
+      <div class="card-body"><p>Patients discharging from Sheppard Pratt, GBMC, and University of Maryland often need outpatient evaluation follow-up. Discharge planners refer to OON providers when in-network wait times are too long.</p></div>
+      <div class="card-footer"><span class="card-rate" style="color:var(--purple)">$2,000–$4,000 <span class="pay-pill pay-self">Self-pay + superbill</span></span><span class="card-cta">Full strategy</span></div>
+    </div>
+
+    <div class="card border-purple" onclick="openDrawer('superbill')">
+      <div class="card-header"><div class="card-icon c-purple">📄</div>
+        <div><div class="card-title">Superbill Strategy for OON Families</div><div class="card-sub">Help families maximize reimbursement</div></div>
+      </div>
+      <div class="card-body"><p>Providing detailed superbills empowers families to seek OON reimbursement from their insurance. Understanding this process — and teaching families how to use it — removes the biggest barrier to OON self-pay engagement.</p></div>
+      <div class="card-footer"><span class="card-rate" style="color:var(--purple)">Reduces family cost · Increases access</span><span class="card-cta">Full guide</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ LEGAL ══ -->
+<section class="section" id="sec-legal">
+  <div class="section-intro">
+    <h2>Legal, justice system &amp; community agency referrals</h2>
+    <p>Legal channels are almost entirely unaffected by your OON status — attorneys fund evaluations directly, courts issue orders with payment provisions, and agencies use purchase orders. These are among your most lucrative and friction-free channels. Click any card for the full strategy.</p>
+  </div>
+  <div class="oon-callout"><strong>OON impact on legal channels: minimal.</strong> Attorneys pay for evaluations from client funds or their own operating accounts. Courts issue orders directing a party to pay. DJS uses purchase orders. Your OON status has virtually no bearing on these channels — lead with credentials, report quality, and turnaround time.</div>
+  <div class="cards-grid">
+
+    <div class="card border-amber" onclick="openDrawer('family-law')">
+      <div class="card-header"><div class="card-icon c-amber">⚖️</div>
+        <div><div class="card-title">Family Law Attorneys</div><div class="card-sub">Custody, parental fitness, child welfare</div></div>
+      </div>
+      <div class="card-body"><p>Court-ready psychological evaluations for custody disputes and parental fitness hearings. Cash-pay by definition — attorneys fund from client escrow or operating accounts. OON status is irrelevant.</p></div>
+      <div class="card-footer"><span class="card-rate" style="color:var(--amber)">$2,500–$5,000 <span class="pay-pill pay-self">Attorney/client pay</span></span><span class="card-cta">Full strategy</span></div>
+    </div>
+
+    <div class="card border-amber" onclick="openDrawer('juvenile')">
+      <div class="card-header"><div class="card-icon c-amber">👦</div>
+        <div><div class="card-title">Juvenile Justice System</div><div class="card-sub">DJS, courts, public defenders</div></div>
+      </div>
+      <div class="card-body"><p>Court-ordered and attorney-requested evaluations for youth. As OON, public defender relationships are your primary path (attorney-funded). DJS purchase orders remain accessible via eMMA registration.</p></div>
+      <div class="card-footer"><span class="card-rate" style="color:var(--amber)">$1,500–$4,500 <span class="pay-pill pay-court">Court/PO/attorney</span></span><span class="card-cta">Full strategy</span></div>
+    </div>
+
+    <div class="card border-amber" onclick="openDrawer('dhs')">
+      <div class="card-header"><div class="card-icon c-amber">🏠</div>
+        <div><div class="card-title">Maryland DHS / DSS</div><div class="card-sub">Child welfare, court-ordered cases</div></div>
+      </div>
+      <div class="card-body"><p>DHS/DSS can issue purchase orders to OON providers for court-ordered evaluations — insurance status does not restrict agency contracting. eMMA registration is the key to accessing these purchase orders.</p></div>
+      <div class="card-footer"><span class="card-rate" style="color:var(--amber)">$2,000–$4,000 <span class="pay-pill pay-agency">Agency PO</span></span><span class="card-cta">Full strategy</span></div>
+    </div>
+
+    <div class="card border-amber" onclick="openDrawer('disability-atty')">
+      <div class="card-header"><div class="card-icon c-amber">📄</div>
+        <div><div class="card-title">Social Security Disability Attorneys</div><div class="card-sub">SSDI, SSI claims documentation</div></div>
+      </div>
+      <div class="card-body"><p>SSDI/SSI evaluations are always self-pay or attorney-funded — never insurance-based. Your OON status is perfectly aligned with how this channel operates. Strong demand for thorough psychological documentation.</p></div>
+      <div class="card-footer"><span class="card-rate" style="color:var(--amber)">$1,500–$3,500 <span class="pay-pill pay-self">Self/attorney pay</span></span><span class="card-cta">Full strategy</span></div>
+    </div>
+
+    <div class="card border-amber" onclick="openDrawer('immigration')">
+      <div class="card-header"><div class="card-icon c-amber">🌍</div>
+        <div><div class="card-title">Immigration Attorneys</div><div class="card-sub">Asylum, VAWA, extreme hardship evals</div></div>
+      </div>
+      <div class="card-body"><p>Forensic psychological evaluations for asylum seekers and VAWA petitioners. Always attorney-funded or private-pay. Growing niche in the Baltimore metro area with significant unmet need.</p></div>
+      <div class="card-footer"><span class="card-rate" style="color:var(--amber)">$1,200–$2,500 <span class="pay-pill pay-self">Attorney/self-pay</span></span><span class="card-cta">Full strategy</span></div>
+    </div>
+
+    <div class="card border-amber" onclick="openDrawer('dda')">
+      <div class="card-header"><div class="card-icon c-amber">♿</div>
+        <div><div class="card-title">DDA — Developmental Disabilities Admin</div><div class="card-sub">Waiver eligibility evaluations</div></div>
+      </div>
+      <div class="card-body"><p>DDA waiver eligibility evaluations can be accessed via agency purchase order as an OON provider. Contact the DDA regional office and register on eMMA — agency contracting does not require insurance panel membership.</p></div>
+      <div class="card-footer"><span class="card-rate" style="color:var(--amber)">$1,500–$3,000 <span class="pay-pill pay-agency">Agency PO</span></span><span class="card-cta">Full strategy</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ FOSTER CARE & ADOPTION ══ -->
+<section class="section" id="sec-foster">
+  <div class="section-intro">
+    <h2>Foster care &amp; adoption evaluations</h2>
+    <p>This is a high-demand, significantly underserved evaluation niche in Maryland. Foster care and adoption evaluations span multiple distinct service types — each with its own referral source, payment mechanism, and evaluation format. Most are cash-pay, agency-funded, or court-ordered, making OON status largely irrelevant. Click any card for the complete strategy.</p>
+  </div>
+  <div class="oon-callout"><strong>OON fits this channel naturally.</strong> Adoptive families and foster family applicants are accustomed to paying out-of-pocket for home study and evaluation services. Agencies issue purchase orders directly. Courts order evaluations with payment provisions. There is very little insurance involvement in this space — your OON status is not a barrier here.</div>
+  <div class="cards-grid">
+
+    <div class="card border-rose" onclick="openDrawer('foster-child')">
+      <div class="card-header"><div class="card-icon c-rose">👧</div>
+        <div><div class="card-title">Foster Child Psychological Evaluations</div><div class="card-sub">DHS/DSS referrals · Court-ordered</div></div>
+      </div>
+      <div class="card-body"><p>Children entering or in foster care frequently need psychological evaluations to assess trauma history, developmental needs, mental health diagnoses, and placement recommendations. DHS/DSS agencies and courts order these — often funded by agency purchase order.</p></div>
+      <div class="card-footer"><span class="card-rate" style="color:var(--rose)">$1,800–$3,500 <span class="pay-pill pay-agency">Agency PO / court</span></span><span class="card-cta">Full strategy</span></div>
+    </div>
+
+    <div class="card border-rose" onclick="openDrawer('foster-parent')">
+      <div class="card-header"><div class="card-icon c-rose">🏡</div>
+        <div><div class="card-title">Foster Parent / Prospective Adoptive Parent Evaluations</div><div class="card-sub">Licensing requirement · Agency-required</div></div>
+      </div>
+      <div class="card-body"><p>Maryland licensing agencies require psychological evaluations for prospective foster and adoptive parents in certain circumstances — particularly when there is a mental health history or when an agency requests additional screening. Agencies refer and families pay directly or through agency funding.</p></div>
+      <div class="card-footer"><span class="card-rate" style="color:var(--rose)">$1,500–$2,500 <span class="pay-pill pay-self">Family self-pay</span></span><span class="card-cta">Full strategy</span></div>
+    </div>
+
+    <div class="card border-rose" onclick="openDrawer('adoption-home')">
+      <div class="card-header"><div class="card-icon c-rose">📋</div>
+        <div><div class="card-title">Adoption Home Study Psychological Component</div><div class="card-sub">Domestic &amp; international adoption</div></div>
+      </div>
+      <div class="card-body"><p>Many adoption agencies and foreign countries require a psychological evaluation as part of the home study process — separate from the social work home study. Adoptive families pay directly. High demand, good revenue, and families are motivated and organized clients.</p></div>
+      <div class="card-footer"><span class="card-rate" style="color:var(--rose)">$1,200–$2,500 <span class="pay-pill pay-self">Adoptive family pay</span></span><span class="card-cta">Full strategy</span></div>
+    </div>
+
+    <div class="card border-rose" onclick="openDrawer('adoption-child')">
+      <div class="card-header"><div class="card-icon c-rose">🌟</div>
+        <div><div class="card-title">Post-Adoption Child Evaluations</div><div class="card-sub">Trauma, RAD, attachment, developmental</div></div>
+      </div>
+      <div class="card-body"><p>Internationally adopted and domestically adopted children frequently present with complex trauma histories, attachment difficulties, developmental delays, and PTSD. Families seek thorough evaluations to understand their child's needs. Almost always self-pay — adoptive families are highly motivated and often have financial resources.</p></div>
+      <div class="card-footer"><span class="card-rate" style="color:var(--rose)">$2,500–$5,000 <span class="pay-pill pay-self">Self-pay</span></span><span class="card-cta">Full strategy</span></div>
+    </div>
+
+    <div class="card border-rose" onclick="openDrawer('foster-agencies')">
+      <div class="card-header"><div class="card-icon c-rose">🤝</div>
+        <div><div class="card-title">Foster Care &amp; Adoption Agencies to Target</div><div class="card-sub">Maryland agency partnerships</div></div>
+      </div>
+      <div class="card-body"><p>Private foster care and adoption agencies in Maryland are direct referral sources. Building relationships with agency directors and home study social workers creates a consistent pipeline of both parent and child evaluations.</p></div>
+      <div class="card-footer"><span class="card-rate" style="color:var(--rose)">Multi-eval relationships per agency</span><span class="card-cta">Full agency list</span></div>
+    </div>
+
+    <div class="card border-rose" onclick="openDrawer('foster-court')">
+      <div class="card-header"><div class="card-icon c-rose">⚖️</div>
+        <div><div class="card-title">Termination of Parental Rights (TPR) Evals</div><div class="card-sub">Court-ordered · High stakes</div></div>
+      </div>
+      <div class="card-body"><p>Courts overseeing termination of parental rights cases require psychological evaluations of parents and sometimes children. These are court-ordered with payment provisions — typically funded by the state or the party ordered to pay. High-stakes, high-impact evaluations requiring forensic-adjacent documentation.</p></div>
+      <div class="card-footer"><span class="card-rate" style="color:var(--rose)">$2,500–$5,000 <span class="pay-pill pay-court">Court-ordered pay</span></span><span class="card-cta">Full strategy</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ VETERANS ══ -->
+<section class="section" id="sec-veterans">
+  <div class="section-intro">
+    <h2>Veterans &amp; DBQ evaluations</h2>
+    <p>This channel is structurally designed for OON providers. DBQ evaluations are always out-of-pocket — the VA does not reimburse private evaluations. Aberdeen Proving Ground, Fort Meade, and Joint Base Andrews create a large, continuous veteran population within your direct service area.</p>
+  </div>
+  <div class="oon-callout"><strong>OON is the norm for DBQ evaluations — this channel was built for you.</strong> Every private DBQ provider is self-pay by definition. Your pitch is simply: speed, quality, and understanding of VA rating criteria. Veterans pay willingly because a successful claim can mean thousands per month in tax-free benefits for life.</div>
+  <div class="cards-grid">
+
+    <div class="card border-coral" onclick="openDrawer('dbq-overview')">
+      <div class="card-header"><div class="card-icon c-coral">📋</div>
+        <div><div class="card-title">DBQ Evaluations — What BHC Offers</div><div class="card-sub">Mental health DBQs · Private evaluations</div></div>
+      </div>
+      <div class="card-body"><p>PTSD, depression, anxiety, TBI-related mental health, MST documentation. Private DBQs support VA disability claims. Veterans pay directly. Turnaround within 5–7 business days commands premium fees.</p></div>
+      <div class="card-footer"><span class="card-rate" style="color:var(--coral)">$600–$1,800 <span class="pay-pill pay-self">Always self-pay</span></span><span class="card-cta">Full overview</span></div>
+    </div>
+
+    <div class="card border-coral" onclick="openDrawer('vsos')">
+      <div class="card-header"><div class="card-icon c-coral">🎖️</div>
+        <div><div class="card-title">Veterans Service Organizations (VSOs)</div><div class="card-sub">DAV, VFW, American Legion posts</div></div>
+      </div>
+      <div class="card-body"><p>VSO service officers help veterans file claims but cannot provide medical documentation. They need trusted evaluation providers. Local posts: VFW Post 7464 (Bel Air), American Legion Post 99 (Aberdeen), DAV (Harford/Baltimore County).</p></div>
+      <div class="card-footer"><span class="card-rate" style="color:var(--coral)">High volume pipeline</span><span class="card-cta">Full strategy</span></div>
+    </div>
+
+    <div class="card border-coral" onclick="openDrawer('vet-attorneys')">
+      <div class="card-header"><div class="card-icon c-coral">👨‍⚖️</div>
+        <div><div class="card-title">Veteran Attorneys &amp; Claims Agents</div><div class="card-sub">VA-accredited · Maryland region</div></div>
+      </div>
+      <div class="card-body"><p>VA-accredited attorneys actively seek reliable mental health DBQ evaluators. Search va.gov/ogc/apps/accreditation for Maryland-licensed agents. Once they trust your reports, they refer repeatedly.</p></div>
+      <div class="card-footer"><span class="card-rate" style="color:var(--coral)">$800–$1,800/DBQ <span class="pay-pill pay-self">Self-pay</span></span><span class="card-cta">Full strategy</span></div>
+    </div>
+
+    <div class="card border-coral" onclick="openDrawer('apg')">
+      <div class="card-header"><div class="card-icon c-coral">🪖</div>
+        <div><div class="card-title">Aberdeen Proving Ground — TAP Program</div><div class="card-sub">Harford County · Continuous pipeline</div></div>
+      </div>
+      <div class="card-body"><p>APG is in your backyard. TAP workshops for separating service members are your most direct veteran pipeline. Connect with APG Family MWR, Employment Readiness, and Army Community Service offices.</p></div>
+      <div class="card-footer"><span class="card-rate" style="color:var(--coral)">New veterans continuously separating</span><span class="card-cta">Full strategy</span></div>
+    </div>
+
+    <div class="card border-coral" onclick="openDrawer('vet-digital')">
+      <div class="card-header"><div class="card-icon c-coral">📱</div>
+        <div><div class="card-title">Digital Marketing to Veterans</div><div class="card-sub">Facebook, Google Ads, veteran communities</div></div>
+      </div>
+      <div class="card-body"><p>Veterans comparison-shop for DBQ providers online and in Facebook groups. Targeted ads within 35 miles of APG and Fort Meade, plus Google search ads for "private DBQ Maryland," convert well.</p></div>
+      <div class="card-footer"><span class="card-rate" style="color:var(--coral)">Self-pay inbound leads</span><span class="card-cta">Full strategy</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ TRAININGS ══ -->
+<section class="section" id="sec-trainings">
+  <div class="section-intro">
+    <h2>Trainings, CE workshops &amp; professional development</h2>
+    <p>BHP's training arm is a referral engine for BHC evaluations. Every clinician who trains with BHP becomes a potential referrer. Below are the training offerings that both generate direct revenue and build the professional relationships that feed your assessment pipeline. Click any training for full details.</p>
+  </div>
+  <div class="oon-callout"><strong>Training as a referral flywheel:</strong> Every LCPC, LCSW, or counselor who completes a BHP training learns your clinical expertise firsthand. When they encounter a client who needs a formal psychological evaluation, BHC is who they call. Each training is simultaneously a revenue stream and a low-cost marketing channel to exactly the right audience.</div>
+
+  <span class="training-category c-teal">CE Workshops &amp; Cultural Competency</span>
+  <div class="training-card" onclick="openDrawer('train-jedi')">
+    <h3>Beyond Competence: Mastering Cultural Humility in Clinical Practice <span style="color:var(--teal);font-size:13px;font-weight:500;cursor:pointer;">→ Full details</span></h3>
+    <div class="tc-meta">
+      <span>4-part CE workshop series</span><span>·</span><span>C.R.E.A.T.E. Moments / JEDI consulting arm</span><span>·</span><span>CE credits: pending approval</span>
+    </div>
+    <p>Developed and delivered for CTSA (Edgewood, MD). Full facilitator guides, participant workbooks, and CE materials built. Available for delivery to clinical agencies, school systems, and professional organizations in the region. Referral source: JEDI engagements lead to agency relationships that generate assessment referrals.</p>
+  </div>
+
+  <div class="training-card" onclick="openDrawer('train-diagnosis')">
+    <h3>Diagnosis in Counseling — Graduate Course &amp; CE Adaptation <span style="color:var(--teal);font-size:13px;font-weight:500;cursor:pointer;">→ Full details</span></h3>
+    <div class="tc-meta">
+      <span>Graduate course (current)</span><span>·</span><span>CE adaptation available</span><span>·</span><span>DSM-5-TR focus</span>
+    </div>
+    <p>Dr. Harper currently teaches this graduate course. The content — diagnostic criteria, case conceptualization, differential diagnosis — can be adapted as a CE workshop for licensed clinicians seeking diagnostic competency training. Positions BHC as the go-to evaluation resource for clinicians in the course.</p>
+  </div>
+
+  <span class="training-category c-purple" style="margin-top:1.25rem;">Clinical Supervision</span>
+  <div class="training-card" onclick="openDrawer('train-supervision')">
+    <h3>Virtual Group Supervision Series — Child &amp; Adolescent Clinicians <span style="color:var(--teal);font-size:13px;font-weight:500;cursor:pointer;">→ Full details</span></h3>
+    <div class="tc-meta">
+      <span>12-month series</span><span>·</span><span>Monthly virtual sessions</span><span>·</span><span>Month 3 (Family Systems) complete · Month 4 (Trauma/ACEs) in progress</span>
+    </div>
+    <p>Monthly group supervision for child and adolescent clinicians. Covers family systems theory, trauma-informed care, ACEs, diagnostic application, and treatment planning. Each supervisee is a referral relationship — when their client needs a psych eval, BHC is the natural next step. Supervision participants also become BHP training advocates within their own agencies.</p>
+  </div>
+
+  <span class="training-category c-amber" style="margin-top:1.25rem;">Assessment-Specific Trainings</span>
+  <div class="training-card" onclick="openDrawer('train-adhd')">
+    <h3>ADHD Assessment &amp; Differential Diagnosis — CE Workshop <span style="color:var(--teal);font-size:13px;font-weight:500;cursor:pointer;">→ Full details</span></h3>
+    <div class="tc-meta"><span>Half-day CE workshop</span><span>·</span><span>Clinicians, school counselors, pediatric nurses</span><span>·</span><span>Can be offered virtually or in-person</span></div>
+    <p>Covers ADHD across the lifespan, differential diagnosis (ADHD vs. anxiety vs. learning disability vs. mood disorder), assessment tools, and when to refer for formal evaluation. Targets pediatricians, school counselors, and therapists — exactly the audience that needs to understand BHC's evaluation services. Dual purpose: CE revenue + referral education.</p>
+  </div>
+
+  <div class="training-card" onclick="openDrawer('train-autism')">
+    <h3>Autism Spectrum Disorder: Assessment, Diagnosis &amp; Support — CE Workshop <span style="color:var(--teal);font-size:13px;font-weight:500;cursor:pointer;">→ Full details</span></h3>
+    <div class="tc-meta"><span>Half-day or full-day CE</span><span>·</span><span>Clinicians, educators, pediatric providers</span></div>
+    <p>Overview of ASD diagnostic criteria (DSM-5-TR), assessment tools (ADOS-2, ADI-R concepts, CARS-2), differential diagnosis, and the evaluation referral process. Educates providers on what a quality ASD evaluation includes — positioning BHC as the provider who delivers that level of assessment. Strong referral driver.</p>
+  </div>
+
+  <div class="training-card" onclick="openDrawer('train-trauma')">
+    <h3>Trauma-Informed Assessment &amp; Psychological Evaluation — CE Workshop <span style="color:var(--teal);font-size:13px;font-weight:500;cursor:pointer;">→ Full details</span></h3>
+    <div class="tc-meta"><span>Half-day CE</span><span>·</span><span>DHS workers, foster care agencies, clinicians, school counselors</span></div>
+    <p>How trauma shapes psychological and behavioral presentation, how to identify trauma in assessment contexts, and when to refer for formal evaluation. Directly relevant to foster care agencies, DHS workers, and school staff — all key referral sources for BHC. Strengthens the foster care and legal referral channels simultaneously.</p>
+  </div>
+
+  <span class="training-category c-rose" style="margin-top:1.25rem;">Specialty Trainings</span>
+  <div class="training-card" onclick="openDrawer('train-veteran')">
+    <h3>Mental Health &amp; Veterans: Assessment Considerations &amp; DBQ Overview <span style="color:var(--teal);font-size:13px;font-weight:500;cursor:pointer;">→ Full details</span></h3>
+    <div class="tc-meta"><span>CE workshop or VSO presentation</span><span>·</span><span>Clinicians, VSO service officers, military family support workers</span></div>
+    <p>Covers military culture, PTSD in veteran populations, MST, TBI, and the DBQ evaluation process. Delivered to VSO posts, military family support organizations, and clinical groups serving veteran populations. Educates VSO service officers on what a strong DBQ evaluation includes — driving referrals directly to BHC.</p>
+  </div>
+
+  <div class="training-card" onclick="openDrawer('train-foster-training')">
+    <h3>Understanding Psychological Evaluations in Foster Care &amp; Adoption — CE Workshop <span style="color:var(--teal);font-size:13px;font-weight:500;cursor:pointer;">→ Full details</span></h3>
+    <div class="tc-meta"><span>Half-day CE</span><span>·</span><span>DSS workers, foster care agency staff, adoption social workers</span></div>
+    <p>What psychological evaluations provide in child welfare contexts, how to read and use an evaluation report, when to refer foster children and adoptive families for assessment, and what the evaluation process involves. Delivered to DSS staff and foster care/adoption agencies — building the exact relationships that generate BHC evaluation referrals in the foster care channel.</p>
+  </div>
+
+</section>
+
+<!-- ══ MATERIALS ══ -->
+<section class="section" id="sec-materials">
+  <div class="section-intro">
+    <h2>Marketing materials by channel</h2>
+    <p>Each referral source requires a purpose-built piece. Every material must address OON/self-pay proactively — either reframing it as a feature or acknowledging it with the superbill solution. Click any row for detailed content guidance.</p>
+  </div>
+  <table class="materials-table">
+    <thead><tr><th>Channel</th><th>Piece needed</th><th>OON message</th><th>Format</th><th></th></tr></thead>
+    <tbody>
+      <tr onclick="openDrawer('mat-school')"><td>School systems</td><td>School referral packet</td><td>"District-funded IEEs · No insurance required"</td><td>PDF + referral form</td><td style="color:var(--teal);font-weight:500;font-size:13px;">Details →</td></tr>
+      <tr onclick="openDrawer('mat-clinical')"><td>Clinical providers</td><td>One-pager + referral pad</td><td>"Self-pay · Superbill provided · 3–4 week turnaround"</td><td>Printed + digital</td><td style="color:var(--teal);font-weight:500;font-size:13px;">Details →</td></tr>
+      <tr onclick="openDrawer('mat-legal')"><td>Attorneys / legal</td><td>Legal credential packet</td><td>No mention needed — cash-pay is the norm</td><td>PDF + cover letter</td><td style="color:var(--teal);font-weight:500;font-size:13px;">Details →</td></tr>
+      <tr onclick="openDrawer('mat-foster')"><td>Foster care &amp; adoption</td><td>Agency intro packet</td><td>"Agency purchase orders accepted · Private pay welcome"</td><td>PDF + letter</td><td style="color:var(--teal);font-weight:500;font-size:13px;">Details →</td></tr>
+      <tr onclick="openDrawer('mat-juvenile')"><td>Juvenile justice</td><td>DJS / court intro packet</td><td>"Purchase orders accepted · eMMA registered"</td><td>PDF + cover letter</td><td style="color:var(--teal);font-weight:500;font-size:13px;">Details →</td></tr>
+      <tr onclick="openDrawer('mat-vet')"><td>Veterans / DBQ</td><td>Veteran-specific flyer</td><td>OON is the norm — emphasize speed &amp; VA expertise</td><td>Printed + social ad</td><td style="color:var(--teal);font-weight:500;font-size:13px;">Details →</td></tr>
+      <tr onclick="openDrawer('mat-digital')"><td>All channels</td><td>Digital intake + QR code</td><td>Include payment options clearly on all forms</td><td>HIPAA-compliant form</td><td style="color:var(--teal);font-weight:500;font-size:13px;">Details →</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ══ 90-DAY PLAN ══ -->
+<section class="section" id="sec-plan">
+  <div class="section-intro">
+    <h2>90-day launch plan</h2>
+    <p>Designed for parallel team execution. Each month has a primary focus but all prior outreach continues. OON/self-pay positioning is woven throughout. Click any block to expand the detailed task list.</p>
+  </div>
+
+  <div class="day-block" id="db-1">
+    <div class="day-block-header" onclick="toggleDayBlock('db-1')">
+      <div class="day-block-num c-teal">M1</div>
+      <div class="day-block-info"><div class="day-block-title">Month 1 — Foundation, Registration &amp; First Wave (Days 1–30)</div><div class="day-block-sub">Infrastructure, eMMA, school systems, first clinical visits</div></div>
+      <span class="day-block-arrow">›</span>
+    </div>
+    <div class="day-block-body">
+      <ul>
+        <li><strong>Week 1:</strong> Register on eMMA (emma.maryland.gov) under NAICS 621112 and 621999. This is the single most important administrative step — it enables government purchase orders for school, DHS, DJS, and DDA referrals as an OON provider.</li>
+        <li><strong>Week 1:</strong> Write letter of interest to BCPS Office of Special Education (6901 Charles St, Towson) and HCPS Office of Special Education (102 S. Hickory Ave, Bel Air). Reference IEE services specifically — districts pay directly regardless of insurance status.</li>
+        <li><strong>Week 1:</strong> Identify and contact 3 private foster care / adoption agencies in Maryland (see Foster Care tab). Introduce BHC's evaluation services and request a meeting.</li>
+        <li><strong>Week 2:</strong> Call DJS Baltimore Metro Regional Office and DJS Upper Chesapeake — ask for the Behavioral Health Coordinator. Mention eMMA registration and request vendor application materials.</li>
+        <li><strong>Week 2:</strong> Call the juvenile division managing attorney at the Office of the Public Defender in Baltimore County (Towson) and Harford County (Bel Air). Attorney-funded evals are your primary juvenile channel as an OON provider.</li>
+        <li><strong>Week 3:</strong> Begin visiting pediatric practices — 5 per week. Printed one-pager leads with turnaround time and superbill availability. Priority: Chesapeake Pediatrics, GBMC-affiliated practices, Luminis Health Harford County.</li>
+        <li><strong>Week 3:</strong> Contact 3 VSO posts (VFW Bel Air, American Legion Aberdeen, DAV Baltimore County) — request to present at a post meeting about private DBQ evaluations.</li>
+        <li><strong>Week 4:</strong> Design and print all channel-specific marketing materials. Each piece addresses OON status proactively. Set up HIPAA-compliant digital intake form (Jotform with BAA) and generate QR codes.</li>
+        <li><strong>Week 4:</strong> Contact APG Family MWR or Employment Readiness office about TAP program speaker opportunity. Request info on their community resource provider process.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day-block" id="db-2">
+    <div class="day-block-header" onclick="toggleDayBlock('db-2')">
+      <div class="day-block-num c-blue">M2</div>
+      <div class="day-block-info"><div class="day-block-title">Month 2 — Relationship Building &amp; Digital Launch (Days 31–60)</div><div class="day-block-sub">Deepen connections, launch veteran ads, foster care and legal outreach</div></div>
+      <span class="day-block-arrow">›</span>
+    </div>
+    <div class="day-block-body">
+      <ul>
+        <li><strong>Week 5:</strong> Follow up every school and DJS contact from Month 1. Push for in-person meetings. Ask school district contacts specifically about IEE provider list inclusion.</li>
+        <li><strong>Week 5:</strong> Launch targeted Facebook/Instagram ads for veteran DBQ evaluations. Target: veterans 25–60 within 35 miles of APG and Fort Meade. Ad copy leads with speed and VA rating expertise, not insurance.</li>
+        <li><strong>Week 6:</strong> Schedule first lunch-and-learn at a pediatric or psychiatric practice. 20 minutes: eval types, how to refer, superbill process for families, turnaround time.</li>
+        <li><strong>Week 6:</strong> Contact Maryland foster care and adoption agencies identified in Month 1. Send the foster care agency intro packet. Follow up by phone 5 days after delivery.</li>
+        <li><strong>Week 6:</strong> Search va.gov/ogc/apps/accreditation for Maryland-based VA-accredited attorneys and claims agents. Send 10 targeted letters introducing BHC's DBQ evaluation services.</li>
+        <li><strong>Week 7:</strong> Visit Juvenile Assessment Center (JAC) in Towson in person. Meet the clinical coordinator. Leave materials. Ask about evaluation referral process for youth needing deeper assessment.</li>
+        <li><strong>Week 7:</strong> Contact 5 family law firms in Towson and Bel Air with your legal credential packet. Follow up by phone 5 days later. Emphasize court-ready report format and turnaround.</li>
+        <li><strong>Week 8:</strong> Contact Maryland Bar Association family law and juvenile law sections about CLE presentation opportunities. One presentation reaches dozens of attorneys simultaneously.</li>
+        <li><strong>Week 8:</strong> Contact Parents Place of Maryland and Maryland Disability Law Center — ask to be included on their IEE evaluator resource lists. These organizations field daily calls from families seeking independent evaluators.</li>
+        <li><strong>Week 8:</strong> Send an email announcement about BHC's evaluation services to every LCPC in your BHP training and supervision network. This is your fastest-converting clinical referral activation.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day-block" id="db-3">
+    <div class="day-block-header" onclick="toggleDayBlock('db-3')">
+      <div class="day-block-num c-purple">M3</div>
+      <div class="day-block-info"><div class="day-block-title">Month 3 — Contracts, Agreements &amp; Scale (Days 61–90)</div><div class="day-block-sub">Close agreements, launch trainings, build referral tracking</div></div>
+      <span class="day-block-arrow">›</span>
+    </div>
+    <div class="day-block-body">
+      <ul>
+        <li><strong>Week 9:</strong> Follow up all school district contacts — push for a formal meeting with the Special Education Supervisor or Procurement office. Offer one IEE as a demonstration of quality and turnaround.</li>
+        <li><strong>Week 9:</strong> Complete and submit DJS vendor application if received. Follow up with the Behavioral Health Coordinator by phone.</li>
+        <li><strong>Week 10:</strong> Schedule and deliver first BHP training or CE workshop — lead with the Trauma-Informed Assessment workshop to DHS or foster care agency staff. This simultaneously generates training revenue and builds the foster care referral relationship.</li>
+        <li><strong>Week 10:</strong> Present at first VSO post meeting. Bring veteran flyers, DBQ service menu, and QR booking code. Offer to answer questions about the VA disability claim process after your presentation.</li>
+        <li><strong>Week 11:</strong> Formalize written referral agreements with any family law, disability, or immigration attorneys who have expressed interest. Simple one-page agreement: turnaround, format, fee, payment terms.</li>
+        <li><strong>Week 11:</strong> Review Facebook/Google ad performance — shift budget to highest-converting audiences. Consider adding a Google search ad campaign for "private DBQ evaluation Maryland" and "psychological evaluation Baltimore."</li>
+        <li><strong>Week 12:</strong> Team debrief — which channels produced the first contacts or referrals? Which outreach did not generate response? Prioritize follow-up on warm contacts, redirect effort away from cold ones.</li>
+        <li><strong>Week 12:</strong> Build a referral tracking spreadsheet: source, date referred, eval type, payment method, status, revenue. This data tells you where to double down in Quarter 2.</li>
+        <li><strong>Week 12:</strong> Contact CASA de Maryland and immigration law firms in Baltimore. Send introduction to BHC's forensic psychological evaluation capacity for asylum, VAWA, and hardship cases.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- DRAWER -->
+<div class="overlay" id="overlay" onclick="closeDrawerOnOverlay(event)">
+  <div class="drawer" id="drawer">
+    <div class="drawer-header">
+      <div class="drawer-title-group">
+        <span class="drawer-badge" id="drawer-badge"></span>
+        <div class="drawer-title" id="drawer-title"></div>
+      </div>
+      <button class="drawer-close" onclick="closeDrawer()">✕</button>
+    </div>
+    <div class="drawer-body" id="drawer-body"></div>
+  </div>
+</div>
+
+<script>
+function showSection(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('active');
+  if(btn)btn.classList.add('active');
+  window.scrollTo({top:document.querySelector('.sticky-nav').offsetTop-1,behavior:'smooth'});
+}
+function toggleDayBlock(id){document.getElementById(id).classList.toggle('open');}
+
+const D={
+  bcps:{badge:'School System',bc:'#1b5ea0',bg:'#e5f0fa',title:'Baltimore County Public Schools',s:[
+    {t:'OON impact — mostly favorable',b:`<div class="oon-drawer"><span class="oon-label">Out-of-network strategy</span>As an OON provider, your primary school channel is <strong>IEE evaluations</strong> — these are district-funded directly, bypassing insurance entirely. For general contracted evaluation slots, BCPS can issue purchase orders to OON providers when their internal staff cannot meet IDEA's 60-day timeline. Register on eMMA first, then request to be on their IEE list and their general contracted provider list separately.</div>`},
+    {t:'How to get the contract',steps:['Register on eMMA (emma.maryland.gov) under NAICS 621112 and 621999 — BCPS Purchasing uses this to find vendors.','Write to the BCPS Director of Special Education, 6901 Charles Street, Towson, MD 21204. Reference IDEA 60-day timelines, your eval types, turnaround time, and that you accept district purchase orders.','Contact BCPS Purchasing and Contracts at the same address — ask specifically about the Special Education Contracted Services vendor list and whether purchase orders can be issued to OON providers.','Request placement on the IEE referral list specifically — this is your highest-priority ask and has no insurance requirement.','Follow up the letter with a phone call within 5 business days. Ask to schedule a 20-minute call with the Supervisor of Psychological Services.']},
+    {t:'Your pitch to BCPS',pitch:`"We are a licensed Maryland psychological assessment practice serving Baltimore County families. We specialize in psychoeducational, ADHD, autism spectrum, and emotional disturbance evaluations and can guarantee reports within [X] business days. We are an out-of-network practice, which means we can provide services via district purchase order with no insurance authorization delays — particularly valuable for IEE situations and for clearing evaluation backlogs against IDEA's 60-day window."`},
+    {t:'Eval types to highlight',tags:['Psychoeducational','ADHD','Autism Spectrum (ASD)','Emotional Disturbance','Cognitive (IQ)','Learning Disability','Gifted Assessment']},
+    {t:'Revenue',b:`<span class="rate-pill c-blue">$2,500 – $5,000 per evaluation · District purchase order · No insurance billing</span>`}
+  ]},
+
+  hcps:{badge:'School System',bc:'#1b5ea0',bg:'#e5f0fa',title:'Harford County Public Schools',s:[
+    {t:'Your geographic advantage',b:`BHP already operates in Harford County — this is your single strongest differentiator. Lead with it in every communication. HCPS serves Aberdeen, Edgewood, Joppatowne, Bel Air, and Fallston directly. With fewer contracted psych providers than BCPS and a smaller bureaucratic structure, this is your fastest school-system entry point.`},
+    {t:'OON approach for HCPS',b:`<div class="oon-drawer"><span class="oon-label">Out-of-network strategy</span>Same as BCPS — prioritize IEE list placement first. For contracted slots, HCPS is a smaller office with more direct access. Mention your eMMA registration and offer to work via purchase order. The office may be more willing to engage with an OON provider than a large district's procurement office would be.</div>`},
+    {t:'How to approach HCPS',steps:['Send letter of interest to HCPS Office of Special Education, 102 S. Hickory Avenue, Bel Air, MD 21014, addressed to the Supervisor of Psychological Services.','Request placement on the IEE referral list — this is the highest-priority ask.','Follow up by phone within 5 business days. Smaller district = more accessible staff.','Offer to visit in person for a 15-minute introduction meeting.','Ask about their process for issuing purchase orders to contracted evaluation providers.']},
+    {t:'Your pitch',pitch:`"As a behavioral health assessment practice already operating in Harford County, we are uniquely positioned to serve HCPS families with minimal travel burden. We are an out-of-network practice and work via district purchase order — no insurance authorization required, no billing delays. We'd like to be on your IEE provider list and discuss how we can help with evaluation backlog."`},
+    {t:'Revenue',b:`<span class="rate-pill c-blue">$2,500 – $5,000 per evaluation · District purchase order</span>`}
+  ]},
+
+  iee:{badge:'School System — IEE',bc:'#1b5ea0',bg:'#e5f0fa',title:'Independent Educational Evaluations (IEE)',s:[
+    {t:'Why IEEs are your best school channel as an OON provider',b:`IEEs are perfectly aligned with your OON status. When a parent disputes a school's evaluation under IDEA, they request an independent evaluation — and independence means the evaluator is explicitly <em>not</em> affiliated with the school system. Being OON actually strengthens your credibility as an IEE provider. The district must fund the evaluation at a rate "comparable to market," supporting full-fee billing of $3,000–$5,000.`},
+    {t:'Two pathways to IEE referrals',steps:['<strong>Direct from districts:</strong> Contact BCPS and HCPS and ask to be placed on their IEE provider lists. When parents request IEEs, districts provide this list.','<strong>Direct from parents:</strong> Market to parent advocacy groups. When parents request an IEE, they can choose their own evaluator if the district does not provide a suitable list. Families who know your name will request you specifically.','<strong>Parents Place of Maryland:</strong> This organization (parentplacemd.org) helps families with special education rights — contact them to be included in their provider resource lists.','<strong>Maryland Disability Law Center:</strong> Provides legal support to families navigating IEP disputes — another organization that fields requests for IEE evaluator recommendations.','<strong>Special education Facebook groups:</strong> Join parent groups for Baltimore and Harford County — when parents ask for IEE evaluator recommendations, be a visible resource.']},
+    {t:'Payment',b:`Districts issue a direct check or purchase order to BHC — no insurance involvement. Rates are set by market comparables. Document your standard private-pay fee rate clearly and consistently, as districts use this to validate IEE reimbursement amounts.`},
+    {t:'Revenue',b:`<span class="rate-pill c-blue">$3,000 – $5,000 per evaluation · District pays directly to BHC</span> One of the highest-returning, lowest-friction channels in your entire referral ecosystem.`}
+  ]},
+
+  'private-schools':{badge:'School System',bc:'#1b5ea0',bg:'#e5f0fa',title:'Private & Catholic Schools',s:[
+    {t:'Why private schools are strong OON territory',b:`Private school families are already accustomed to paying for education out-of-pocket. Self-pay for evaluations is a natural extension of their mindset. These families often have the financial capacity to pay your full fee and are motivated to get thorough results — not just a quick in-network appointment.`},
+    {t:'College accommodation evaluations',b:`A particularly strong product for private school families: psychological evaluation for college accommodation documentation (extended time, separate testing room, etc.). These evaluations must meet specific documentation standards and are almost always self-pay. Private high school families seeking SAT/ACT accommodations or college ADA documentation are a high-demand, high-capacity audience.`},
+    {t:'How to approach',steps:['Contact the school counselor or academic dean at each private school directly.','Ask to send an informational packet and be included in their external provider resource list.','Offer to attend a parent information night or present at a counselor professional development day.','Target: Calvert Hall (Towson), Loyola Blakefield (Towson), Notre Dame Prep (Towson), Archbishop Spalding (Severn), John Carroll School (Bel Air), Stone Bridge School (Harford Co.).']},
+    {t:'Revenue',b:`<span class="rate-pill c-blue">$2,500 – $4,500 · Self-pay</span> Provide superbills — many private school families have PPO plans with OON benefits.`}
+  ]},
+
+  pediatricians:{badge:'Clinical Referrals',bc:'#5a3585',bg:'#f0eafa',title:'Pediatricians & Family Practice',s:[
+    {t:'OON pitch that converts',b:`<div class="oon-drawer"><span class="oon-label">How to handle the OON conversation</span>When you visit a practice, they will ask if you take insurance. Your answer: <em>"We are a self-pay practice. Families pay at time of service and we provide a detailed superbill they can submit for potential OON reimbursement from their insurance. The reason families choose us: we can typically complete an evaluation in 3–4 weeks. The in-network alternatives in this area have 6–18 month waits. For families who need answers now — school placements, medication decisions, IEP timelines — we are often the only realistic option."</em></div>`},
+    {t:'Who to target',b:`Chesapeake Pediatrics (multiple Baltimore County locations), GBMC Pediatrics, Luminis Health Primary Care (Harford County, Aberdeen area), Greater Baltimore Pediatrics, Kids First Pediatrics (Bel Air), any practice with a large patient panel in Towson, White Marsh, Parkville, Bel Air, Aberdeen, or Edgewood.`},
+    {t:'Outreach approach',steps:['Visit in person with a printed one-pager and referral pads (printed pads reduce referral friction dramatically).','Ask to speak with the practice manager first, then request 5 minutes with the lead physician.','Leave materials with front desk and nurse manager even if you cannot speak with the physician directly.','Follow up by email 2 weeks after your visit.','Offer a lunch-and-learn: 20 minutes, you provide lunch, cover eval types, superbill process, how to refer.']},
+    {t:'Superbill strategy for families',b:`BHC provides families a detailed superbill with diagnosis codes, procedure codes, and all required billing information. Families with PPO plans can submit this for OON reimbursement — often recovering 30–70% of the fee. Teaching physicians this process removes their hesitation to refer to an OON provider.`},
+    {t:'Revenue',b:`<span class="rate-pill c-purple">$1,800 – $3,500 · Self-pay + superbill</span>`}
+  ]},
+
+  psychiatrists:{badge:'Clinical Referrals',bc:'#5a3585',bg:'#f0eafa',title:'Child & Adolescent Psychiatrists',s:[
+    {t:'Why psychiatrists refer OON freely',b:`Psychiatrists are accustomed to working across insurance panels — they often don't take insurance themselves. They value accuracy and thoroughness in psychological testing far more than panel membership. When they find an evaluator who produces strong, clinically useful reports, they refer repeatedly regardless of insurance status.`},
+    {t:'Where to find them',b:`Sheppard Pratt outpatient clinics (Towson and multiple locations), Kennedy Krieger Institute (Baltimore), University of Maryland outpatient psychiatry, Harford County Mental Health Center (Bel Air), any private child/adolescent psychiatric practice in the Baltimore metro area. Search the Maryland Psychiatric Society directory.`},
+    {t:'Approach',steps:['Email a brief introduction with your credential summary and evaluation menu — be specific about eval types.','Follow up with a phone call to the office manager to confirm receipt.','Request a 15-minute in-person introduction meeting.','Offer to consult on diagnostic questions — positioning as a colleague, not just a vendor.']},
+    {t:'Revenue',b:`<span class="rate-pill c-purple">$2,000 – $4,000 · Self-pay + superbill</span>`}
+  ]},
+
+  therapists:{badge:'Clinical Referrals',bc:'#5a3585',bg:'#f0eafa',title:'LCPCs, LCSWs & Counselors',s:[
+    {t:'Your fastest-converting referral source',b:`BHP's training and supervision network is a pre-existing pool of warm referral relationships. Every clinician who has trained with BHP, completed supervision with Dr. Harper, or attended a BHP CE workshop already trusts BHC's clinical expertise. The activation effort here is minimal — they just need to know BHC exists and how to refer.`},
+    {t:'The activation email',b:`Send a broadcast email to every LCPC and LCSW in your network this week. Subject line: "BHC is now accepting referrals for psychological evaluations." Body: eval types, age ranges, how to refer, superbill information for families, turnaround time. Keep it to 150 words. Include a referral intake link.`},
+    {t:'Formalize the relationship',steps:['Create a referral card — one side: BHC contact and services; other side: "When to refer for a psych eval" checklist.','Include referral information in all BHP training materials and CE certificates.','Build a simple mutual referral agreement for therapists who want a formal partnership.','Consider a quarterly clinician networking lunch — BHP hosts, BHC gets referral visibility.']},
+    {t:'Revenue',b:`<span class="rate-pill c-purple">$1,500 – $3,000 · Self-pay + superbill</span>`}
+  ]},
+
+  neurologists:{badge:'Clinical Referrals',bc:'#5a3585',bg:'#f0eafa',title:'Neurologists & Developmental Pediatricians',s:[
+    {t:'High-value specialty referrals',b:`Neurologists and developmental pediatricians need comprehensive psychological and neuropsychological testing to complement their medical workup for ADHD, autism, TBI, and seizure-related cognitive concerns. Kennedy Krieger Institute is a major regional center — they have long internal wait times and routinely refer outward for evaluations. OON is standard in this referral flow.`},
+    {t:'Key facilities',b:`Kennedy Krieger Institute (Baltimore), GBMC Neurology, University of Maryland Neurology outpatient, MedStar neurology, any pediatric neurology practice in the region. Also target developmental pediatricians associated with Johns Hopkins Children's Center.`},
+    {t:'Approach',steps:['Send a credential introduction letter outlining neuropsychological and psychological evaluation capacity.','Emphasize: ADHD testing, autism assessment, cognitive assessment, TBI follow-up, learning disability evaluation.','Request to be included on their external referral list for patients needing psychological testing.','Offer a brief call with the attending neurologist to discuss evaluation protocols and report format.']},
+    {t:'Revenue',b:`<span class="rate-pill c-purple">$2,500 – $5,000 · Self-pay + superbill</span>`}
+  ]},
+
+  sheppard:{badge:'Clinical Referrals',bc:'#5a3585',bg:'#f0eafa',title:'Sheppard Pratt & Hospital Systems',s:[
+    {t:'Discharge referral pipeline',b:`Patients discharging from inpatient or partial hospitalization programs at Sheppard Pratt, GBMC Behavioral Health, and University of Maryland often need outpatient follow-up evaluations. When in-network options have long wait times, discharge planners refer to OON providers who can see patients quickly.`},
+    {t:'Approach',steps:['Contact the Director of Outpatient Services at Sheppard Pratt and GBMC Behavioral Health.','Request a meeting with their discharge planning team or outpatient referral coordinators.','Provide a one-page summary of BHC\'s services, turnaround times, and superbill process for families.','For Harford County: contact Harford County Mental Health Center and TeleCommunity Health — primary outpatient providers receiving hospital-discharged patients.']},
+    {t:'Revenue',b:`<span class="rate-pill c-purple">$2,000 – $4,000 · Self-pay + superbill</span>`}
+  ]},
+
+  superbill:{badge:'OON Strategy',bc:'#5a3585',bg:'#f0eafa',title:'Superbill Strategy for OON Families',s:[
+    {t:'What a superbill is',b:`A superbill is a detailed receipt that includes: provider NPI number, diagnosis codes (ICD-10), procedure codes (CPT), dates of service, fees charged, and provider credentials. Families submit this to their insurance company for potential out-of-network reimbursement.`},
+    {t:'How much families can recover',b:`With a PPO or POS plan that has OON benefits, families typically recover 30–70% of your fee after meeting their OON deductible. HMO plans typically do not have OON benefits. The reimbursement is not guaranteed, but for many families it meaningfully reduces their out-of-pocket cost.`},
+    {t:'What to include on every superbill',tags:['Provider name, credentials, NPI','Practice name and Tax ID / EIN','Date(s) of service','CPT codes (e.g., 96130, 96131, 96136, 96137)','ICD-10 diagnosis codes','Total fee charged','Amount paid by client','Practice address and phone']},
+    {t:'How to present this to referring providers',b:`<div class="oon-drawer"><span class="oon-label">Script for referring provider conversations</span>"Many families we work with have PPO plans with out-of-network benefits. We provide a detailed superbill after each evaluation that they can submit directly to their insurance for reimbursement. Depending on their plan, they may recover a significant portion of the fee. For families with IDEA rights, the school district may fund the evaluation directly, bypassing insurance entirely."</div>`},
+    {t:'CPT codes for psychological evaluations',b:`Common codes: <strong>96130</strong> (psychological testing evaluation services by physician or QHP, first hour), <strong>96131</strong> (each additional hour), <strong>96136</strong> (psychological or neuropsychological testing by technician, first 30 min), <strong>96137</strong> (each additional 30 min), <strong>96130 + 96132</strong> (neuropsychological testing evaluation, first hour + additional). Confirm with your billing consultant — code selection depends on who administers vs. interprets.`}
+  ]},
+
+  'family-law':{badge:'Legal & Justice',bc:'#a85f00',bg:'#fdf2e0',title:'Family Law Attorneys',s:[
+    {t:'OON status is irrelevant here',b:`<div class="oon-drawer"><span class="oon-label">Out-of-network note</span>Family law evaluations are cash-pay by definition. Attorneys fund evaluations from client escrow accounts or operating funds. Courts can order a party to pay for an evaluation as part of the case. Insurance has no role in this channel — your OON status is a non-issue. Lead purely with credentials, report quality, and turnaround.</div>`},
+    {t:'Types of evaluations needed',b:`Parental fitness evaluations, child psychological evaluation for trauma or behavioral concerns in custody disputes, parent psychological evaluation for mental health history documentation, risk assessment, adult ADHD and learning disability documentation for family court, forensic-adjacent psychological assessment.`},
+    {t:'How to reach family law attorneys',steps:['Send a targeted letter to family law firms in Towson and Bel Air. Introduce BHC\'s forensic-adjacent evaluation capacity.','Attend Maryland State Bar Association family law section events and CLE programs.','Offer to present a CLE on psychological evaluation interpretation for attorneys — attorneys earn credits, you earn name recognition.','Network at bar association events — family law attorneys share evaluator recommendations actively.']},
+    {t:'Your pitch',pitch:`"BHC provides comprehensive psychological evaluations formatted for court submission — including parental fitness assessments, child trauma evaluations, and cognitive and emotional functioning assessments. Our reports are written for legal audiences as well as clinical use. We can provide written letters supporting our findings if needed. We are a self-pay practice, which means no insurance authorization delays and no billing complications — we invoice directly and our fees are transparent upfront."`},
+    {t:'Revenue',b:`<span class="rate-pill c-amber">$2,500 – $5,000 · Attorney/client funded · Cash-pay</span>`}
+  ]},
+
+  juvenile:{badge:'Legal & Justice',bc:'#a85f00',bg:'#fdf2e0',title:'Juvenile Justice System',s:[
+    {t:'OON impact on juvenile justice channels',b:`<div class="oon-drawer"><span class="oon-label">Out-of-network strategy</span>As an OON provider, your primary juvenile justice pathway shifts to <strong>attorney-funded evaluations</strong> via public defenders and private defense counsel — these are paid from operating funds, not through insurance. DJS purchase orders can be issued to OON providers via eMMA registration. Court-ordered evaluations with payment provisions are also accessible. Medicaid-billed DJS slots are less accessible, but this is a smaller portion of the opportunity.</div>`},
+    {t:'Three evaluation types this system generates',b:`<strong>Competency evaluations</strong> — does the youth understand the court process? Court-ordered, 30–45 day turnaround required, $1,500–$3,500. <strong>Diversion evaluations</strong> — mental health or substance use screen for youth who may be diverted from prosecution. <strong>Disposition evaluations</strong> — requested before sentencing to inform placement decisions, frequently attorney-funded, $2,500–$4,500.`},
+    {t:'Your primary OON pathway — Office of the Public Defender',steps:['Call the managing attorney of the juvenile division at OPD Baltimore County (Towson) and OPD Harford County (Bel Air).','Introduce BHC and ask to be added to their evaluator list for youth needing independent psychological assessments.','Public defenders pay from operating funds — your OON status has no bearing on their ability to refer to you.','Once on their list, referrals come without ongoing marketing effort.']},
+    {t:'DJS purchase order pathway',steps:['Register on eMMA — this is how DJS issues purchase orders to external providers.','Call DJS Baltimore Metro and Upper Chesapeake regional offices. Ask for the Behavioral Health Coordinator.','Request vendor application materials. Mention your eMMA registration.','DJS purchase orders bypass insurance — they pay BHC directly from agency funds.']},
+    {t:'Revenue',b:`<span class="rate-pill c-amber">$1,500 – $4,500 · Attorney-funded or agency PO · Cash-pay or court-ordered</span>`}
+  ]},
+
+  dhs:{badge:'Legal & Justice',bc:'#a85f00',bg:'#fdf2e0',title:'Maryland DHS / DSS',s:[
+    {t:'Purchase orders bypass insurance',b:`<div class="oon-drawer"><span class="oon-label">Out-of-network note</span>DHS/DSS agencies fund evaluations via purchase orders issued from their agency budget — not through insurance. As an OON provider registered on eMMA, you are fully eligible to receive these purchase orders. Your OON status is not a barrier to agency contracting.</div>`},
+    {t:'How to become a DHS evaluation provider',steps:['Register on eMMA under NAICS 621112 and 621999 — DHS Purchasing uses this system to find vendors.','Contact Baltimore County DSS — ask for the Supervisor of Child Welfare Services or Foster Care Services Director.','Contact Harford County DSS in Bel Air with the same request.','Ask specifically about becoming an approved evaluator for court-ordered psychological assessments.','Ask about their purchase order process — turnaround requirements, report format standards, and invoice submission procedure.']},
+    {t:'Revenue',b:`<span class="rate-pill c-amber">$2,000 – $4,000 · Agency purchase order · No insurance billing</span>`}
+  ]},
+
+  'disability-atty':{badge:'Legal & Justice',bc:'#a85f00',bg:'#fdf2e0',title:'Social Security Disability Attorneys',s:[
+    {t:'Always self-pay — perfect OON fit',b:`SSDI and SSI evaluation documentation is always self-pay or attorney-funded. Insurance has no role in Social Security disability evaluation. Your OON status is completely aligned with how this channel operates.`},
+    {t:'How to reach them',steps:['Search Maryland State Bar Association directory for attorneys with Social Security disability practice.','Contact NOSSCR (National Organization of Social Security Claimants\' Representatives) — Maryland chapter holds events where attorney-provider relationships are built.','Send targeted credential letter to disability law firms in the Baltimore metro area.','Emphasize: comprehensiveness, DSM-5 alignment, functional capacity language that SSA evaluators understand, turnaround time.']},
+    {t:'Revenue',b:`<span class="rate-pill c-amber">$1,500 – $3,500 · Attorney-funded or client self-pay · Cash-pay</span>`}
+  ]},
+
+  immigration:{badge:'Legal & Justice',bc:'#a85f00',bg:'#fdf2e0',title:'Immigration Attorneys',s:[
+    {t:'Forensic psychological evaluations for immigration cases',b:`Immigration evaluations for asylum, VAWA, and extreme hardship are always attorney-funded or self-pay — no insurance involvement. Growing niche in the Baltimore metro area with significant unmet need. Attorneys in this practice area are actively looking for qualified mental health evaluators who can produce culturally sensitive, legally formatted reports.`},
+    {t:'Evaluation types',tags:['Asylum psychological evaluation','VAWA mental health evaluation','Extreme hardship cancellation evaluation','U-visa mental health documentation','MST documentation for immigration cases']},
+    {t:'How to approach',steps:['Contact CASA de Maryland — they work with large immigrant communities and can connect you with immigration attorneys.','Search the American Immigration Lawyers Association (AILA) Maryland/DC chapter directory.','Send a brief introduction to immigration law firms in Baltimore and Harford County.','Familiarize yourself with the UNHCR Istanbul Protocol and forensic immigration evaluation format before accepting these cases.']},
+    {t:'Revenue',b:`<span class="rate-pill c-amber">$1,200 – $2,500 · Attorney-funded or self-pay</span>`}
+  ]},
+
+  dda:{badge:'Legal & Justice',bc:'#a85f00',bg:'#fdf2e0',title:'Maryland DDA — Developmental Disabilities Admin',s:[
+    {t:'Agency purchase orders — OON accessible',b:`<div class="oon-drawer"><span class="oon-label">Out-of-network note</span>DDA waiver eligibility evaluations are funded via agency purchase orders, not insurance. OON providers registered on eMMA are eligible. Contact the DDA regional office and register on eMMA to access this referral stream.</div>`},
+    {t:'What DDA evaluations include',b:`Documentation of intellectual disability, autism spectrum disorder, or related developmental disability for Medicaid waiver program eligibility. Required components: standardized IQ testing (WAIS-IV, WISC-V), adaptive behavior assessment (Vineland-3, ABAS-3), functional impact documentation using DDA-specific language.`},
+    {t:'How to connect',steps:['Contact the DDA Regional Office for the Baltimore/Chesapeake region.','Ask about their evaluation provider network and application process.','Contact Arc Maryland and The Arc of Baltimore — they help families navigate DDA eligibility and maintain provider resource lists.','Also contact SEEC, RehabCare, and other DDA service providers who work with families — they often help coordinate evaluations.']},
+    {t:'Revenue',b:`<span class="rate-pill c-amber">$1,500 – $3,000 · Agency purchase order</span>`}
+  ]},
+
+  // FOSTER CARE
+  'foster-child':{badge:'Foster Care & Adoption',bc:'#9c2d5a',bg:'#fce8f0',title:'Foster Child Psychological Evaluations',s:[
+    {t:'The evaluation need',b:`Children entering or residing in foster care present with complex trauma histories, developmental concerns, behavioral challenges, PTSD, attachment difficulties, and undiagnosed neurodevelopmental conditions. DHS/DSS agencies, courts, and foster care placement agencies order psychological evaluations to inform placement decisions, service needs, IEP eligibility, and treatment planning.`},
+    {t:'OON access pathway',b:`<div class="oon-drawer"><span class="oon-label">Out-of-network strategy</span>DHS/DSS issues purchase orders to OON providers for court-ordered and agency-requested evaluations. Register on eMMA and contact DSS in both counties. Private foster care agencies issue purchase orders from their own agency budgets. Court-ordered evaluations include payment provisions. There is minimal insurance involvement in foster care evaluation funding.</div>`},
+    {t:'Referral sources',steps:['Baltimore County DSS Child Welfare division — ask to be an approved evaluation provider.','Harford County DSS in Bel Air — same request.','Private foster care agencies (see Foster Care Agencies card) — they order evaluations from their operating budgets.','Juvenile court and family court judges who oversee foster care placements.','CASA (Court Appointed Special Advocate) programs in both counties — CASAs advocate for children in court and often facilitate referrals for evaluations.']},
+    {t:'Key eval components for foster children',tags:['Trauma history documentation','PTSD assessment','Attachment style assessment','Developmental screening','ADHD/behavioral evaluation','Placement recommendation','IEP eligibility support']},
+    {t:'Revenue',b:`<span class="rate-pill c-rose">$1,800 – $3,500 · Agency PO or court-ordered · Direct pay to BHC</span>`}
+  ]},
+
+  'foster-parent':{badge:'Foster Care & Adoption',bc:'#9c2d5a',bg:'#fce8f0',title:'Foster & Prospective Adoptive Parent Evaluations',s:[
+    {t:'When are these evaluations required?',b:`Maryland foster care licensing agencies require psychological evaluations for prospective foster parents when there is a documented mental health history, when a licensing concern arises, or when an agency requests additional screening as part of their own heightened standards. Not required universally, but frequently needed and families are highly motivated to complete them in order to be licensed.`},
+    {t:'Who requests them',b:`Private foster care agencies, the Maryland Department of Human Services licensing division, and adoption agencies may request these evaluations. Families themselves also seek evaluations proactively when they anticipate questions about mental health history during the home study process.`},
+    {t:'What the evaluation covers',b:`Current mental health functioning, any history of mental health diagnoses and current status, parenting capacity assessment, stress management and coping, support systems, risk factors and protective factors for foster/adoptive parenting. The report must be written in plain, accessible language and directly address the licensing agency's specific questions.`},
+    {t:'OON note',b:`<div class="oon-drawer"><span class="oon-label">Out-of-network strategy</span>Families pay directly — this is consistently self-pay. Some agencies reimburse a portion. Your OON status has no impact. Families are motivated and organized — they are completing a licensing process and understand that associated costs are part of the process.</div>`},
+    {t:'Revenue',b:`<span class="rate-pill c-rose">$1,500 – $2,500 · Family self-pay</span>`}
+  ]},
+
+  'adoption-home':{badge:'Foster Care & Adoption',bc:'#9c2d5a',bg:'#fce8f0',title:'Adoption Home Study Psychological Evaluation',s:[
+    {t:'Domestic and international adoption requirements',b:`Many adoption agencies — particularly for international adoptions and for some domestic agencies with heightened standards — require a psychological evaluation of adoptive parents as part of the home study process. This is a separate piece from the social work home study. Countries such as China, South Korea, India, and others have historically required psychological clearance letters or full evaluations.`},
+    {t:'What adoptive families need',b:`A psychological evaluation or psychological clearance letter assessing mental health history, current functioning, parenting capacity, and absence of contraindicated conditions. The report format varies by agency and country — confirm requirements before conducting the evaluation. Many international adoption programs have specific questionnaire formats (e.g., the Hague Convention countries, I-800A application support).`},
+    {t:'How to reach adoptive families',steps:['Contact Maryland adoption agencies — they maintain lists of approved psychological evaluators for their home study process. Request to be added.','Contact home study social workers directly — they are the point of contact for coordinating all components of the home study, including the psychological eval.','List BHC on adoption-focused directories: Adoptive Families magazine provider directory, adoption agency resource pages.','Join Maryland adoption support groups online (Facebook, Yahoo groups) — families often post requests for evaluator recommendations.']},
+    {t:'OON note',b:`<div class="oon-drawer"><span class="oon-label">Out-of-network strategy</span>Always self-pay. Adoptive families are accustomed to significant out-of-pocket costs throughout the adoption process — legal fees, agency fees, travel, home study costs. A psychological evaluation fee is a familiar and expected line item. Your OON status is not a barrier.</div>`},
+    {t:'Revenue',b:`<span class="rate-pill c-rose">$1,200 – $2,500 · Always self-pay · Adoptive family direct pay</span>`}
+  ]},
+
+  'adoption-child':{badge:'Foster Care & Adoption',bc:'#9c2d5a',bg:'#fce8f0',title:'Post-Adoption Child Evaluations',s:[
+    {t:'Why this is a premium evaluation niche',b:`Internationally and domestically adopted children frequently present with complex clinical pictures: early trauma and neglect, institutional care history, reactive attachment disorder (RAD), PTSD, developmental delays, FASD (fetal alcohol spectrum disorder), sensory processing concerns, and undiagnosed ADHD or learning disabilities. Adoptive families are motivated, informed, and willing to invest in thorough evaluations. They often have private financial resources and are highly engaged clients.`},
+    {t:'What these evaluations cover',tags:['Trauma history and PTSD assessment','Attachment evaluation (RAD, secure, disorganized)','Cognitive and developmental assessment','ADHD and executive function testing','Language processing and learning disability','FASD screening and evaluation','Behavioral and adaptive functioning','Family and placement recommendations']},
+    {t:'Where to find these families',steps:['Adoption agencies — post-placement, they refer families to evaluation resources.','Adoptive parent support groups: North American Council on Adoptable Children (NACAC), Adoptive Families Together (AFT).','Facebook groups for adoptive parents in Maryland — active communities that share provider recommendations.','Post on Adoption Learning Partners, Creating a Family, and similar national adoption support platforms.','Pediatricians who serve adopted children — especially internationally adopted children — frequently need evaluation partners.']},
+    {t:'Revenue',b:`<span class="rate-pill c-rose">$2,500 – $5,000 · Self-pay · Highly motivated, financially engaged clients</span> These are often the most complex and most thorough evaluations BHC will conduct — and the most clinically rewarding. Rates at the top of your range are appropriate and expected.`}
+  ]},
+
+  'foster-agencies':{badge:'Foster Care & Adoption',bc:'#9c2d5a',bg:'#fce8f0',title:'Maryland Foster Care & Adoption Agencies to Target',s:[
+    {t:'Private foster care agencies — Baltimore & Harford counties',steps:['<strong>TheraPsil / Therapeutic Family Life</strong> — Baltimore County, therapeutic foster care placements.','<strong>A Better Chance, Inc.</strong> — Baltimore region, foster and therapeutic foster care.','<strong>The Salvation Army Foster Care Program</strong> — Baltimore area.','<strong>Youth Advocate Programs (YAP)</strong> — statewide, intensive in-home and foster care services.','<strong>Pressley Ridge Maryland</strong> — therapeutic foster care, behavioral health focus.','<strong>Medstar Family Choice</strong> — coordinates with foster care families in Maryland.']},
+    {t:'Adoption agencies',steps:['<strong>Adoption Center of Maryland</strong> — domestic adoption, Baltimore area.','<strong>WACAP (World Association for Children and Parents)</strong> — international adoption, has Maryland families.','<strong>Adoptions Together</strong> — Maryland and DC, domestic and international.','<strong>Maryland Department of Human Services Adoption Services</strong> — public adoption from foster care.','<strong>Barker Adoption Foundation</strong> — domestic infant and foster adoption.']},
+    {t:'How to approach each agency',b:`Contact the agency director or clinical director by email with a brief introduction and your foster care / adoption evaluation services menu. Follow up by phone within 5 days. Ask to be placed on their approved provider list for psychological evaluations. Offer to present to their case managers or social workers about when and how to refer for psychological evaluations — this is a mini-training that builds the relationship and generates referrals.`},
+    {t:'Revenue potential per agency relationship',b:`A single foster care agency relationship can generate 10–30 evaluation referrals per year — both child evaluations and parent evaluations. At $2,000–$3,500 each, one strong agency partnership is worth $20,000–$100,000 annually.`}
+  ]},
+
+  'foster-court':{badge:'Foster Care & Adoption',bc:'#9c2d5a',bg:'#fce8f0',title:'Termination of Parental Rights (TPR) Evaluations',s:[
+    {t:'What TPR evaluations involve',b:`Courts overseeing termination of parental rights cases require psychological evaluations of parents — assessing mental health functioning, parenting capacity, substance use, trauma history, and prognosis for change. These are high-stakes, forensic-adjacent evaluations that carry legal weight. Courts also sometimes order evaluations of children in TPR cases to assess trauma impact and placement readiness.`},
+    {t:'Who orders and who pays',b:`TPR evaluations are court-ordered — the judge issues an order directing that an evaluation be completed and specifying who bears the cost. In Maryland, this is often the state (DHS budget) or the respondent parent's attorney. Purchase orders or court-authorized payment mechanisms are used. Your OON status has no bearing on court-ordered evaluations with payment provisions.`},
+    {t:'How to access these cases',steps:['Build relationships with family law attorneys who handle TPR cases — they request evaluations of their clients proactively to shape the court\'s view.','Build relationships with the OPD family division (separate from juvenile) — they represent parents in TPR cases and need evaluators.','Introduce BHC to DSS attorneys and DSS social workers who manage TPR cases — they facilitate court-ordered evaluation requests.','Baltimore County Circuit Court family law division and Harford County Circuit Court — the same contacts you build for custody evaluations.']},
+    {t:'Revenue',b:`<span class="rate-pill c-rose">$2,500 – $5,000 · Court-ordered · State or attorney-funded</span> High-complexity evaluations appropriately billed at the top of your rate range.`}
+  ]},
+
+  // VETERANS
+  'dbq-overview':{badge:'Veterans & DBQ',bc:'#b8321e',bg:'#fcecea',title:'DBQ Evaluations — What BHC Offers',s:[
+    {t:'What is a DBQ?',b:`A Disability Benefits Questionnaire (DBQ) is the VA's standardized form for documenting service-connected conditions for disability claims. Private providers — including licensed psychologists — complete mental health DBQs for veterans seeking to establish or increase their VA disability rating. The VA does not reimburse private DBQs. Veterans pay out-of-pocket — and do so willingly because a higher rating can mean thousands of dollars per month in tax-free compensation for life.`},
+    {t:'Why OON is the norm for DBQs',b:`<div class="oon-drawer"><span class="oon-label">OON perfectly aligned</span>Every private DBQ provider is self-pay by definition. There is no in-network option for private DBQ evaluations — the VA conducts its own C&P exams, and private providers compete on speed, quality, and VA rating expertise. Your OON status gives you nothing to explain or overcome here.</div>`},
+    {t:'Mental health DBQs BHC can complete',tags:['PTSD DBQ (most in-demand)','Mental Disorders DBQ (depression, anxiety)','Eating Disorders DBQ','TBI — Cognitive Symptoms','MST-related PTSD documentation','Substance Abuse Disorders DBQ']},
+    {t:'What makes a strong DBQ',b:`Veterans and their attorneys need evaluators who understand VA rating criteria — not just clinical diagnosis. Key elements: DSM-5 diagnosis clearly documented, nexus to military service established, VA functional impairment language (impact on occupational and social functioning), Global Assessment of Functioning (GAF) or WHODAS if applicable. Speed matters: 5–7 business day turnaround commands premium fees.`},
+    {t:'Pricing structure',b:`<span class="rate-pill c-coral">$600 – $900 standard mental health DBQ</span><span class="rate-pill c-coral">$1,200 – $1,800 complex PTSD / comprehensive eval</span><br>Post pricing transparently on your website — veterans comparison-shop and respond to transparency.`}
+  ]},
+
+  vsos:{badge:'Veterans & DBQ',bc:'#b8321e',bg:'#fcecea',title:'Veterans Service Organizations (VSOs)',s:[
+    {t:'Your highest-volume veteran channel',b:`VSO service officers help veterans understand their benefits and file disability claims — but cannot provide medical documentation. They actively need trusted evaluation providers to refer their members to. One VSO service officer who trusts your work can generate dozens of referrals per year.`},
+    {t:'VSO posts to contact',steps:['VFW Post 7464 — Bel Air, Harford County','VFW Post 2234 — Edgewood, Harford County','American Legion Post 99 — Aberdeen, MD (right at APG)','American Legion Post 7 — Towson, Baltimore County','DAV Chapter 74 — Baltimore County','DAV Chapter 43 — Harford County','AMVETS Maryland — statewide, contact state commander','Maryland Department of Veterans Affairs (MDVA) — state-level service officers']},
+    {t:'How to approach',steps:['Call or email the post commander or service officer at each post.','Ask to present for 10–15 minutes at a post meeting — bring veteran flyers and a QR code to your booking page.','Leave printed materials: veteran flyer, credentials, DBQ service menu, pricing.','Follow up every 3 months — VSO leadership turns over and relationships need refreshing.']},
+    {t:'Your pitch to VSOs',pitch:`"I'm Dr. Harper, a licensed psychologist in Harford and Baltimore County. I provide private mental health DBQ evaluations for veterans seeking to establish or increase their VA disability rating for PTSD, depression, anxiety, and related conditions. I understand VA rating criteria, deliver reports within 5–7 business days, and can see veterans quickly — often within a week. I'd like to be a resource your service officers can share with any member who needs this evaluation."`}
+  ]},
+
+  'vet-attorneys':{badge:'Veterans & DBQ',bc:'#b8321e',bg:'#fcecea',title:'Veteran Attorneys & Claims Agents',s:[
+    {t:'Why they become repeat referrers',b:`VA-accredited attorneys are paid a percentage of a veteran's past-due benefits when they win a claim. They are highly motivated to get the strongest possible supporting documentation and actively seek mental health evaluators who know how to write DBQs that support higher ratings. Once they trust your reports, they refer every applicable client.`},
+    {t:'How to find them',b:`Search the VA's official accreditation database at va.gov/ogc/apps/accreditation. Filter by Maryland to find all VA-accredited attorneys and claims agents in the state — this is a public directory with contact information.`},
+    {t:'How to approach',steps:['Identify 15–20 VA-accredited attorneys and agents in Maryland.','Send each a one-page letter introducing BHC\'s DBQ evaluation services — emphasize VA rating criteria expertise and turnaround time.','Follow up by phone within a week.','Offer a 15-minute call to discuss your evaluation process and report format.']},
+    {t:'Revenue',b:`<span class="rate-pill c-coral">$800 – $1,800 per DBQ · Veterans pay directly</span>`}
+  ]},
+
+  apg:{badge:'Veterans & DBQ',bc:'#b8321e',bg:'#fcecea',title:'Aberdeen Proving Ground — TAP Program',s:[
+    {t:'APG is your doorstep',b:`Aberdeen Proving Ground is the largest employer in Harford County and generates a continuous flow of separating service members who immediately become veterans needing disability claim support. The Transition Assistance Program (TAP) runs mandatory workshops for every separating service member — your most direct veteran pipeline.`},
+    {t:'How to get APG access',steps:['Contact APG Family and Morale, Welfare and Recreation (MWR) — coordinates community resource presentations.','Contact APG Employment Readiness Office — TAP workshops include community providers.','Contact Army Community Service (ACS) at APG Garrison — maintains resource library for service members.','Once connected, request a resource table at a TAP session or a 15-minute segment in their benefits education module.']},
+    {t:'Also target Fort Meade and JBA',b:`Fort Meade (Anne Arundel County) and Joint Base Andrews (Prince George\'s County) follow the same access model — TAP coordinators, MWR, and ACS offices. Building relationships at all three installations creates a continuous new-veteran pipeline.`},
+    {t:'Your TAP pitch',pitch:`"As you transition from active duty, consider filing a VA disability claim for any mental health conditions connected to your service — PTSD, anxiety, depression, TBI-related symptoms. Private DBQ evaluations provide documentation that supports your claim at a higher level of detail than the standard VA C&P exam. BHC is a licensed psychological practice right here in Harford County. We do these evaluations quickly — typically within 1–2 weeks — so you have strong documentation from day one of your claim."`}
+  ]},
+
+  'vet-digital':{badge:'Veterans & DBQ',bc:'#b8321e',bg:'#fcecea',title:'Digital Marketing to Veterans',s:[
+    {t:'Facebook & Instagram ads',steps:['Create a campaign targeting veterans aged 25–60 within 35 miles of APG and Fort Meade.','Interest targeting: "Veterans of Foreign Wars," "VA benefits," "military veteran," "DAV," "VFW," "military disability."','Headline: "Get Your DBQ Done Fast — Private Mental Health Evaluations for VA Claims in Maryland"','Ad copy: "Don\'t wait months for a VA C&P exam. Dr. Harper provides private PTSD and mental health DBQ evaluations in Harford and Baltimore County — results in 5–7 business days. Book online."','Link to a dedicated landing page with credentials, DBQ types, pricing, and booking link.']},
+    {t:'Google search ads',b:`Target: "private DBQ evaluation Maryland," "PTSD evaluation for VA claim Maryland," "private C&P exam alternative Baltimore," "VA disability mental health evaluation Maryland." These are high-intent searches — people looking for this exact service.`},
+    {t:'Veteran Facebook groups',b:`Join Maryland-specific veteran Facebook groups and veteran benefits communities. When veterans ask for DBQ provider recommendations, respond professionally with a brief introduction. Do not spam — respond helpfully when directly relevant.`},
+    {t:'Website landing page',b:`Create a dedicated DBQ page on the BHC website with: what a DBQ is in plain language, list of DBQs offered, your qualifications, pricing, turnaround time, and a booking link. This page should be optimized for Google search for Maryland-specific terms.`}
+  ]},
+
+  // TRAININGS
+  'train-jedi':{badge:'Training — JEDI / Cultural Competency',bc:'#0d7a6a',bg:'#e0f2ee',title:'Beyond Competence: Mastering Cultural Humility',s:[
+    {t:'Workshop overview',b:`A 4-part continuing education workshop series developed and delivered for CTSA (Edgewood, MD) through the C.R.E.A.T.E. Moments / JEDI consulting arm. Full facilitator guides, participant workbooks, and CE approval materials are complete and ready for replication.`},
+    {t:'Workshop modules',steps:['Module 1: From Competence to Humility — reframing the cultural learning posture','Module 2: Identity, Power, and the Clinical Relationship — privilege, bias, and the therapeutic frame','Module 3: Culturally Responsive Assessment and Diagnosis — application to psychological evaluation contexts','Module 4: Organizational and Systems-Level Cultural Humility — policy, supervision, and structural change']},
+    {t:'Delivery targets',b:`Clinical agencies, DSS/DHS staff training, school system professional development, hospital behavioral health departments, foster care agencies (especially relevant given trauma-informed and culturally responsive evaluation needs), private practice groups seeking CE programming.`},
+    {t:'Referral flywheel',b:`Every agency that brings C.R.E.A.T.E. Moments in for JEDI training becomes a BHC referral relationship. The JEDI engagement opens the door — the evaluation referral comes when the clinical director knows Dr. Harper and trusts her expertise.`},
+    {t:'CE logistics',b:`Submit to Maryland LCPC and LCSW CE approval boards for credit. If offering to other state licensees, check reciprocal approval requirements. NBCC (National Board for Certified Counselors) approval extends reach to counselors nationally.`}
+  ]},
+
+  'train-diagnosis':{badge:'Training — CE Adaptation',bc:'#0d7a6a',bg:'#e0f2ee',title:'Diagnosis in Counseling — CE Adaptation',s:[
+    {t:'Current use and CE potential',b:`Dr. Harper currently teaches this content as a graduate course covering DSM-5-TR diagnostic criteria, differential diagnosis, case conceptualization, and clinical application. The same content — condensed and practitioner-focused — is highly marketable as a CE workshop for licensed clinicians seeking diagnostic competency training.`},
+    {t:'Proposed CE workshop formats',tags:['Full day: Introduction to DSM-5-TR for Practitioners (6 CE hours)','Half day: Bipolar and Related Disorders — Diagnosis and Differential (3 CE hours)','Half day: ADHD Across the Lifespan — Diagnosis and Assessment (3 CE hours)','Half day: Trauma and Stressor-Related Disorders — DSM-5-TR Update (3 CE hours)']},
+    {t:'Why this drives BHC referrals',b:`Clinicians who attend a diagnostics CE workshop taught by Dr. Harper see her diagnostic expertise firsthand. When their client needs a formal evaluation — not just a clinical impression but a full psychological assessment — BHC is the natural referral. This is the most efficient conversion from training to evaluation referral.`}
+  ]},
+
+  'train-supervision':{badge:'Training — Clinical Supervision',bc:'#5a3585',bg:'#f0eafa',title:'Virtual Group Supervision Series',s:[
+    {t:'Current status',b:`12-month virtual group supervision series for child and adolescent clinicians. Month 3 (Family Systems Theory) is fully built and delivered. Month 4 (Trauma-Informed Care and ACEs) is in progress. The series covers diagnostic application, family systems, trauma, and treatment planning across the child and adolescent lifespan.`},
+    {t:'Monthly topic arc',steps:['Month 1: Foundations of child and adolescent clinical work — developmental considerations','Month 2: Diagnostic application in child and adolescent populations — DSM-5-TR','Month 3: Family systems theory — Complete','Month 4: Trauma-informed care and ACEs — In progress','Month 5: Attachment theory in clinical practice','Month 6: ADHD — assessment, diagnosis, and behavioral intervention','Month 7: Autism spectrum — clinical presentation and support strategies','Month 8: Anxiety across childhood and adolescence','Month 9: Mood disorders in youth — depression and early bipolar','Month 10: Cultural considerations in child and adolescent work','Month 11: Risk assessment — suicide, self-harm, and crisis','Month 12: Termination, transitions, and continuing care planning']},
+    {t:'Referral flywheel',b:`Every supervisee is a standing referral relationship. When their client needs a formal psychological evaluation, BHC is the natural first call. Supervisees also advocate for BHC within their home agencies, generating additional referral pathways at no marketing cost.`}
+  ]},
+
+  'train-adhd':{badge:'Training — Assessment CE',bc:'#a85f00',bg:'#fdf2e0',title:'ADHD Assessment & Differential Diagnosis — CE Workshop',s:[
+    {t:'Workshop overview',b:`Half-day CE workshop (3 hours) covering ADHD across the lifespan — from preschool through adulthood. Differential diagnosis (ADHD vs. anxiety vs. learning disability vs. mood disorder vs. trauma), assessment tools, rating scales, and when to refer for formal psychological evaluation.`},
+    {t:'Target audience',tags:['Licensed therapists and counselors (LCPCs, LCSWs)','School counselors and school psychologists','Pediatric nurses and nurse practitioners','Primary care clinical staff']},
+    {t:'Why this is a powerful referral driver',b:`By teaching providers how to distinguish when a clinical impression is sufficient versus when a formal evaluation is needed, you position yourself as the expert who conducts those formal evaluations. Every attendee who encounters an ambiguous ADHD presentation will think of BHC.`},
+    {t:'Delivery',b:`Virtual or in-person. Can be delivered to a single agency group or as an open enrollment CE event. Offer to private practice groups, pediatric practices, school counselor professional development days.`}
+  ]},
+
+  'train-autism':{badge:'Training — Assessment CE',bc:'#a85f00',bg:'#fdf2e0',title:'Autism Spectrum Disorder: Assessment & Diagnosis — CE',s:[
+    {t:'Workshop overview',b:`Half-day or full-day CE workshop covering ASD diagnostic criteria under DSM-5-TR, assessment tools and their purposes (ADOS-2, ADI-R concepts, CARS-2, GARS-3), differential diagnosis, co-occurring conditions, and the evaluation referral process. Written for clinicians and educators who encounter children and adults with potential ASD — not for evaluators.`},
+    {t:'Why it drives referrals',b:`Clinicians who understand what a quality ASD evaluation includes — and what BHC specifically provides — are much more likely to refer. They know what to tell families to expect, which builds family confidence and reduces resistance to the evaluation process.`},
+    {t:'Target audience',tags:['Therapists and counselors working with children','School staff — teachers, counselors, special ed','Pediatricians and pediatric nurses','Foster care and adoption agency staff (ASD is prevalent in this population)']},
+  ]},
+
+  'train-trauma':{badge:'Training — Assessment CE',bc:'#a85f00',bg:'#fdf2e0',title:'Trauma-Informed Assessment & Psychological Evaluation — CE',s:[
+    {t:'Workshop overview',b:`Half-day CE (3 hours) covering how trauma shapes psychological and behavioral presentation, how to identify trauma in clinical and school settings, trauma-informed approaches to assessment, and when to refer for formal evaluation. Includes ACEs framework, polyvagal theory basics, and practical clinical application.`},
+    {t:'Dual purpose for BHC',b:`This workshop directly targets DHS workers, foster care agency staff, and school counselors — three of your most important referral pipelines. Delivering this training builds the exact relationships that generate BHC assessment referrals in those channels simultaneously. It is a marketing investment that also generates training revenue.`},
+    {t:'Target delivery sites',steps:['Baltimore County DSS — staff training day','Harford County DSS — staff training day','Private foster care agencies (Pressley Ridge, Therapeutic Family Life, etc.)','BCPS and HCPS school counselor professional development','Sheppard Pratt clinical staff training']},
+  ]},
+
+  'train-veteran':{badge:'Training — Veteran Services',bc:'#b8321e',bg:'#fcecea',title:'Mental Health & Veterans: Assessment & DBQ Overview',s:[
+    {t:'Workshop overview',b:`CE workshop or VSO presentation covering military culture, PTSD in veteran populations, MST, TBI-related psychological presentations, and the private DBQ evaluation process. Can be delivered as a formal CE workshop for clinicians or as a shorter educational presentation for VSO service officers and military family support workers.`},
+    {t:'For clinicians (CE format)',b:`Covers: military cultural competency, veteran-specific PTSD presentations, MST clinical considerations, TBI overlap with psychiatric diagnosis, and the DBQ evaluation process — what a good one includes and how to refer veterans appropriately. 3 CE hours.`},
+    {t:'For VSO service officers (non-CE format)',b:`30-minute presentation at a VSO post meeting explaining what a private mental health DBQ evaluation is, what the evaluation process looks like, what a good report includes, and how to help a member find a qualified private evaluator. This is your VSO relationship builder.`},
+    {t:'Referral outcome',b:`Clinicians who complete this CE know what a quality DBQ evaluation looks like and will refer veteran clients to BHC. VSO service officers who attend the post presentation know Dr. Harper's expertise and will recommend BHC to members who need evaluations.`}
+  ]},
+
+  'train-foster-training':{badge:'Training — Foster Care & Adoption',bc:'#9c2d5a',bg:'#fce8f0',title:'Psychological Evaluations in Foster Care & Adoption — CE',s:[
+    {t:'Workshop overview',b:`Half-day CE (3 hours) for DSS workers, foster care agency clinical staff, adoption social workers, and clinicians working with child welfare populations. Covers what psychological evaluations provide in child welfare contexts, how to read and interpret an evaluation report, when to refer foster children and prospective parents for psychological assessment, and what the evaluation process involves from the family's perspective.`},
+    {t:'Why this drives BHC referrals directly',b:`The audience for this training is the exact population that refers to BHC for foster care and adoption evaluations. DSS workers who understand the evaluation process and trust the evaluator's expertise are the ones who make referrals. Every attendee who later encounters a foster child or adoptive family who needs an evaluation will know exactly who to call.`},
+    {t:'Delivery targets',steps:['Baltimore County DSS staff training','Harford County DSS staff training','Private foster care agency staff — Therapeutic Family Life, Pressley Ridge, Youth Advocate Programs','Adoption agency social workers — Adoptions Together, Adoption Center of Maryland','CASA volunteer training (Court Appointed Special Advocates)']},
+    {t:'CE approval',b:`Submit to Maryland Board of Social Work Examiners for LCSW credit and Maryland Board of Professional Counselors for LCPC credit. Consider NASW (National Association of Social Workers) CE program approval for broader reach.`}
+  ]},
+
+  // MATERIALS
+  'mat-school':{badge:'Marketing Materials',bc:'#4a5568',bg:'#eeecea',title:'School Referral Packet — OON Edition',s:[
+    {t:'Content and OON framing',b:`<strong>Cover letter:</strong> Address to Special Education Director. Reference IDEA 60-day compliance, your eval types, turnaround time, and — critically — that BHC accepts <em>district purchase orders</em> and is available for IEE evaluations, which are district-funded regardless of insurance.<br><br><strong>Credential summary:</strong> Dr. Harper's PhD, LCPC, specialty areas, BHC evaluation menu.<br><br><strong>Payment section:</strong> Include a clear, brief paragraph: "BHC is an out-of-network practice. For school-referred evaluations, we work via district purchase order — no insurance billing required. For IEE situations, we are paid directly by the district at market rates. We are also available for private-pay families who prefer to work directly with BHC and pursue OON reimbursement from their insurance with a superbill we provide."<br><br><strong>Referral form:</strong> Include fields for "Funding source: District PO / IEE / Family private pay" to set expectations upfront.`},
+    {t:'Format',b:`Professional PDF for email. Printed and bound for in-person delivery to district offices. Include BHC letterhead throughout. QR code links to online referral intake form.`}
+  ]},
+
+  'mat-clinical':{badge:'Marketing Materials',bc:'#4a5568',bg:'#eeecea',title:'Clinical Provider One-Pager — OON Edition',s:[
+    {t:'OON language that converts',b:`Lead with <strong>turnaround time</strong> — this is your #1 value over in-network alternatives. Underneath evaluation types and insurances, include: <em>"BHC is a self-pay practice. Families receive a detailed superbill for potential OON reimbursement from their insurance. Most families with PPO plans recover a meaningful portion of the fee."</em><br><br>Do not lead with OON status — lead with speed and expertise, then address payment as a secondary element. Providers who need a fast, thorough evaluation for their patient will refer regardless of insurance status.`},
+    {t:'Referral pads',b:`Print referral pads for each practice you visit — simple pads with provider name fields, patient info, reason for referral, and BHC contact info. Include a line: "Payment: Self-pay / Superbill provided." Pads reduce referral friction enormously.`},
+    {t:'Format',b:`Single printed page — high quality print consistent with BHC branding. Digital PDF for email. QR code on every printed copy linking to HIPAA-compliant intake form.`}
+  ]},
+
+  'mat-legal':{badge:'Marketing Materials',bc:'#4a5568',bg:'#eeecea',title:'Legal Credential Packet — OON Edition',s:[
+    {t:'OON framing for legal audiences',b:`Do not hedge or apologize about being OON. For attorneys, the payment structure is: their client pays, or the court orders payment, or they pay from operating funds. Insurance has no role. Your packet simply states your fee structure clearly — that is all attorneys need.<br><br>Include: BHC fee schedule for legal evaluation types, payment terms (payment before report release is standard for legal evaluations), invoice format, and note that BHC does not bill insurance and all fees are direct-pay.`},
+    {t:'What to include in the packet',b:`Cover letter, credential summary, evaluation types for legal contexts (parental fitness, forensic-adjacent, custody support, SSDI documentation), report format description (court-ready language, available for deposition or testimony), fee schedule, turnaround timeline, and contact information.`}
+  ]},
+
+  'mat-foster':{badge:'Marketing Materials',bc:'#4a5568',bg:'#eeecea',title:'Foster Care & Adoption Agency Intro Packet',s:[
+    {t:'Content',b:`<strong>Cover letter:</strong> Address to agency director or clinical director. Reference specific evaluation types: foster child psychological evaluations, prospective parent evaluations, adoption home study psychological components, post-adoption evaluations.<br><br><strong>Payment section:</strong> "BHC is an out-of-network practice. We accept agency purchase orders directly — no insurance billing required. For foster parent and adoptive family evaluations, we work on a private-pay basis with families paying at time of service."<br><br><strong>Evaluation menu:</strong> List all foster care / adoption eval types with descriptions and fee ranges for each.`},
+    {t:'Include a training offer',b:`End the packet with a brief offer: "BHC also offers a half-day CE workshop — 'Understanding Psychological Evaluations in Foster Care and Adoption' — for agency clinical staff. Contact us to schedule." This invites the agency into a training relationship that deepens the referral pipeline.`}
+  ]},
+
+  'mat-juvenile':{badge:'Marketing Materials',bc:'#4a5568',bg:'#eeecea',title:'DJS / Juvenile Court Intro Packet',s:[
+    {t:'OON framing for juvenile justice',b:`For DJS and court contacts, the key credential is your eMMA registration — it enables purchase orders. State this clearly in your cover letter: "BHC is registered on Maryland eMMA (Vendor #XXXXX) and is available to receive DJS purchase orders for contracted evaluation services."<br><br>For public defenders: no insurance framing needed. Simply state your fee range and payment terms — attorney-funded evaluations are paid from operating funds.`},
+    {t:'Content',b:`Cover letter addressing Behavioral Health Coordinator (DJS) or Managing Attorney (OPD). Credential summary. Juvenile-specific evaluation menu: competency, diversion, disposition. Payment: "DJS purchase orders accepted. For attorney-requested evaluations, we invoice directly with payment due prior to report release." Turnaround: state your timeline clearly — courts have deadlines.`}
+  ]},
+
+  'mat-vet':{badge:'Marketing Materials',bc:'#4a5568',bg:'#eeecea',title:'Veteran / DBQ Flyer — OON Edition',s:[
+    {t:'OON is a non-issue for veteran marketing',b:`Every private DBQ provider is self-pay. Veterans understand this. Do not mention OON status at all — it is the default and expected. Your flyer focuses entirely on speed, expertise, and VA rating knowledge.`},
+    {t:'Flyer content',b:`<strong>Headline:</strong> "Get Your VA Rating Supported — Private Mental Health Evaluations for Veterans"<br><br><strong>Body:</strong> "Don't wait months for a VA C&P exam. BHC provides private PTSD, depression, anxiety, and TBI-related mental health evaluations that support your VA disability claim. We understand VA rating criteria and deliver reports within 5–7 business days."<br><br><strong>DBQs offered:</strong> List your specific mental health DBQs.<br><br><strong>Credentials:</strong> Dr. Donica Harper, PhD, LCPC — Licensed Psychologist, Maryland.<br><br><strong>Pricing:</strong> Be transparent. Veterans comparison-shop — show your fee range.<br><br><strong>Booking:</strong> Phone + QR code to booking link.`},
+    {t:'Distribution',b:`VSO post bulletin boards, APG resource tables, VA waiting rooms (with permission), veteran-owned businesses in Harford County, public libraries in Aberdeen and Bel Air.`}
+  ]},
+
+  'mat-digital':{badge:'Marketing Materials',bc:'#4a5568',bg:'#eeecea',title:'Digital Intake Form & QR Code System',s:[
+    {t:'Why this is critical for an OON practice',b:`For an OON/self-pay practice, making the payment process and intake process as clear and frictionless as possible directly affects conversion. Families who are considering a self-pay evaluation will drop off at any point of confusion or inconvenience. A clean, simple intake form with transparent payment information removes that friction.`},
+    {t:'What the form must include',tags:['Patient name and DOB','Referring provider name and contact','Reason for referral / eval type requested','Payment method: Self-pay / Agency PO / Attorney-funded / Court-ordered','Insurance info (for superbill purposes)','Best way to reach family/client','Urgency / timeline notes']},
+    {t:'Platform recommendation',b:`<strong>Jotform</strong> with a signed Business Associate Agreement (BAA) — HIPAA-compliant, free tier available, easy QR code generation. SimplePractice or TherapyNotes if already in use. Do not use Google Forms for anything containing PHI.`},
+    {t:'Include payment information on the form',b:`Add a brief note on the intake form: "BHC is a self-pay practice. Payment is due at time of service. We provide a detailed superbill for OON insurance reimbursement. Agency purchase orders are accepted with advance written authorization." Setting expectations at intake prevents payment friction later.`}
+  ]},
+};
+
+function openDrawer(key){
+  const d=D[key];
+  if(!d)return;
+  document.getElementById('drawer-badge').textContent=d.badge;
+  document.getElementById('drawer-badge').style.background=d.bg;
+  document.getElementById('drawer-badge').style.color=d.bc;
+  document.getElementById('drawer-title').textContent=d.title;
+  let html='';
+  for(const sec of d.s){
+    html+=`<div class="drawer-section"><div class="drawer-section-title">${sec.t}</div>`;
+    if(sec.steps){html+=`<ol class="step-list">`;for(const s of sec.steps)html+=`<li>${s}</li>`;html+=`</ol>`;}
+    else if(sec.tags){html+=`<div class="tag-row">`;for(const t of sec.tags)html+=`<span class="tag">${t}</span>`;html+=`</div>`;}
+    else if(sec.pitch){html+=`<div class="pitch-box"><span class="pitch-label">Sample pitch script</span><em>"${sec.pitch}"</em></div>`;}
+    if(sec.b)html+=`<div style="margin-top:${sec.steps||sec.tags||sec.pitch?'0.75rem':'0'}">${sec.b}</div>`;
+    html+=`</div>`;
+  }
+  document.getElementById('drawer-body').innerHTML=html;
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeDrawer(){document.getElementById('overlay').classList.remove('open');document.body.style.overflow='';}
+function closeDrawerOnOverlay(e){if(e.target===document.getElementById('overlay'))closeDrawer();}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer();});
+</script>
+</body>
+</html>
